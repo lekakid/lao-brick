@@ -64,7 +64,7 @@ TextureImporter:
     second: J4
   - first:
       213: -5394495448988688574
-    second: S
+    second: S1
   - first:
       213: -7950244741553997805
     second: S2
@@ -603,7 +603,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: S
+      name: S1
       rect:
         serializedVersion: 2
         x: 127
