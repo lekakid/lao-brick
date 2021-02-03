@@ -76,7 +76,7 @@ public class BoardController : MonoBehaviour
 
     void GenerateBrick() {
         BrickScriptableObject data = _generator.GetRandomBrick();
-        _currentBrick.pivot = new Vector2(4, 16);
+        _currentBrick.pivot = new Vector2(4, 19);
         _currentBrick.rotation = 0;
         _currentBrick.data = data;
         if(_currentBrick.lastRenderers == null && _currentBrick.lastTransforms == null) {
