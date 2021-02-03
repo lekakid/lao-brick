@@ -152,6 +152,17 @@ public class BoardController : MonoBehaviour
         return false;
     }
 
+    void FallBrick() {
+        int rotation = _currentBrick.rotation;
+        if(CastBrick(Vector2.down)) {
+            PlaceBrick();
+            return;
+        }
+        _currentBrick.pivot += Vector2.down;
+
+        RenderBrick();
+    }
+
     public void OnMove(InputAction.CallbackContext context) {
         if(context.performed) {
             Vector2 input = context.ReadValue<Vector2>();
