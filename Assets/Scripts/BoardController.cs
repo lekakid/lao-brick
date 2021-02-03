@@ -89,6 +89,55 @@ public class BoardController : MonoBehaviour
         }
     }
 
+    bool CastBrick(Vector2 direction) {
+        int rotation = _currentBrick.rotation;
+        Vector2 pivot = _currentBrick.pivot + direction;
+        Vector2[] offsets = _currentBrick.data.Offsets[rotation];
+        
+        for(int i = 0; i < 4; i++) {
+            float ox = offsets[i].x;
+            float oy = offsets[i].y;
+            int x = (int)(pivot.x + ox);
+            int y = (int)(pivot.y + oy);
+
+            // 벽충돌 검사
+            if(x < 0 || x >= 10 || y < 0) {
+                return true;
+            }
+            // 블럭충돌 검사
+            else if(y < 20) {
+                if(_MappingTable[x, y].exists) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    bool CastBrick(int rotation) {
+        Vector2 pivot = _currentBrick.pivot;
+        Vector2[] offsets = _currentBrick.data.Offsets[rotation];
+        
+        for(int i = 0; i <4; i++) {
+            float ox = offsets[i].x;
+            float oy = offsets[i].y;
+            int x = (int)(pivot.x + ox);
+            int y = (int)(pivot.y + oy);
+
+            if(x < 0 || x >= 10 || y < 0) {
+                return true;
+            }
+            else if(y < 20) {
+                if(_MappingTable[x, y].exists) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public void OnMove(InputAction.CallbackContext context) {
         if(context.performed) {
             Debug.Log("십자키 입력 시작");
