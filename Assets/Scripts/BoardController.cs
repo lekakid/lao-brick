@@ -24,6 +24,7 @@ public class BoardController : MonoBehaviour
         public bool exists;
     }
     MappingItem[,] _MappingTable;
+    int[] _itemCount;
 
     BrickGenerator _generator;
     struct Brick {
@@ -42,6 +43,7 @@ public class BoardController : MonoBehaviour
 
     private void Awake() {
         _MappingTable = new MappingItem[10, 20];
+        _itemCount = new int[20];
         for(int y = 0; y < 20; y++) {
             for(int x = 0; x < 10; x++) {
                 GameObject item = Instantiate(ItemPrefab, ItemContainer.localPosition + new Vector3(x, y, 0), Quaternion.identity);
@@ -103,6 +105,7 @@ public class BoardController : MonoBehaviour
             int y = (int)(_currentBrick.pivot.y + offsets[i].y);
 
             _MappingTable[x, y].exists = true;
+            _itemCount[y] += 1;
         }
         
         _currentBrick.hasValue = false;
