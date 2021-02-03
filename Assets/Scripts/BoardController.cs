@@ -140,34 +140,49 @@ public class BoardController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context) {
         if(context.performed) {
-            Debug.Log("십자키 입력 시작");
             Vector2 input = context.ReadValue<Vector2>();
+            Vector2 direction = Vector2.zero;
 
-            if(input.x > 0) {
-                Debug.Log("움직임: RIGHT");
+            // TODO: 키를 누르고 있으면 계속 이동
+            if(input.x != 0f) {
+                direction = (input.x < 0) ? Vector2.left : Vector2.right;
             }
-            else if(input.x < 0) {
-                Debug.Log("움직임: LEFT");
-            }
-
             if(input.y < 0) {
-                Debug.Log("움직임: DOWN");
+                direction = Vector2.down;
             }
+
+            if(CastBrick(direction)) return;
+
+            _currentBrick.pivot += direction;
+            RenderBrick();
         }
         if(context.canceled) {
-            Debug.Log("십자키 입력 끝");
+            // TODO: 키를 누르고 있다 떼면 후처리
         }
     }
     
     public void OnDrop(InputAction.CallbackContext context) {
         if(context.performed) {
-            Debug.Log("드랍");
+            int rotation = _currentBrick.rotation;
+            Vector2 pivot = _currentBrick.pivot;
+
+            while(!CastBrick(Vector2.down)) {
+                _currentBrick.pivot += Vector2.down;
+            }
+            pivot += Vector2.up;
+            _currentBrick.pivot = pivot;
+
+            RenderBrick();
         }
     }
 
     public void OnRotate(InputAction.CallbackContext context) {
         if(context.performed) {
-            Debug.Log("회전");
+            int rotation = (_currentBrick.rotation + 1) % 4;
+            if(CastBrick(rotation)) return;
+
+            _currentBrick.rotation = rotation;
+            RenderBrick();
         }
     }
 }
