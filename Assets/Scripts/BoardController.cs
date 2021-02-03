@@ -107,7 +107,8 @@ public class BoardController : MonoBehaviour
             _MappingTable[x, y].exists = true;
             _itemCount[y] += 1;
         }
-        
+
+        ClearFulledLine();
         _currentBrick.hasValue = false;
         _elapsedTime = 0f;
     }
@@ -195,6 +196,29 @@ public class BoardController : MonoBehaviour
         _elapsedTime = 0f;
 
         RenderBrick();
+    }
+
+    void ClearFulledLine() {
+        for(int l = 19; l >= 0; l--) {
+            if(_itemCount[l] == 10) {
+                if(l == 19) {
+                    for(int x = 0; x < 10; x++) {
+                        _MappingTable[x, l].exists = false;
+                        _MappingTable[x, l].spriteRenderer.sprite = null;
+                    }
+                    _itemCount[l] = 0;
+                }
+                else {
+                    for(int y = l; y < 19; y++) {
+                        for(int x = 0; x < 10; x++) {
+                            _MappingTable[x, y].exists = _MappingTable[x, y + 1].exists;
+                            _MappingTable[x, y].spriteRenderer.sprite = _MappingTable[x, y + 1].spriteRenderer.sprite;
+                        }
+                        _itemCount[y] = _itemCount[y + 1];
+                    }
+                }
+            }
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context) {
