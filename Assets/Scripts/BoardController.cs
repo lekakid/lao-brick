@@ -65,6 +65,20 @@ public class BoardController : MonoBehaviour
         RenderBrick();
     }
 
+    void PlaceBrick() {
+        int rotation = _currentBrick.rotation;
+        Vector2[] offsets = _currentBrick.data.Offsets[rotation];
+
+        for(int i = 0; i < 4; i++) {
+            int x = (int)(_currentBrick.pivot.x + offsets[i].x);
+            int y = (int)(_currentBrick.pivot.y + offsets[i].y);
+
+            _MappingTable[x, y].exists = true;
+        }
+        
+        _currentBrick.hasValue = false;
+    }
+
     void RenderBrick() {
         int rotation = _currentBrick.rotation;
         Vector2[] offsets = _currentBrick.data.Offsets[rotation];
@@ -173,6 +187,7 @@ public class BoardController : MonoBehaviour
             _currentBrick.pivot = pivot;
 
             RenderBrick();
+            PlaceBrick();
         }
     }
 
