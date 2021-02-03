@@ -12,6 +12,12 @@ public class BoardController : MonoBehaviour
     [BoxGroup("Item"), AssetsOnly]
     public GameObject ItemPrefab;
 
+    [BoxGroup("Difficulty")]
+    public float FallDelay = 1.5f;
+    
+    [BoxGroup("Difficulty")]
+    public float SpeedUpRate = 0.95f;
+
     struct MappingItem {
         public SpriteRenderer spriteRenderer;
         public Transform transform;
@@ -30,6 +36,10 @@ public class BoardController : MonoBehaviour
     }
     Brick _currentBrick;
 
+    bool isPlaying = false;
+    float _currentDelay = 0f;
+    float _elapsedTime = 0f;
+
     private void Awake() {
         _MappingTable = new MappingItem[10, 20];
         for(int y = 0; y < 20; y++) {
@@ -44,7 +54,26 @@ public class BoardController : MonoBehaviour
         _generator = GetComponent<BrickGenerator>();
     }
 
+    private void Update() {
+        if(!isPlaying) return;
+
+        if(!_currentBrick.hasValue) {
+            GenerateBrick();
+        }
+
+        if(_elapsedTime >= _currentDelay) {
+            FallBrick();
+        }
+
+        _elapsedTime += Time.deltaTime;
+    }
+
     [Button]
+    void StartGame() {
+        _currentDelay = FallDelay;
+        isPlaying = true;
+    }
+
     void GenerateBrick() {
         BrickScriptableObject data = _generator.GetRandomBrick();
         _currentBrick.pivot = new Vector2(4, 16);
@@ -77,6 +106,7 @@ public class BoardController : MonoBehaviour
         }
         
         _currentBrick.hasValue = false;
+        _elapsedTime = 0f;
     }
 
     void RenderBrick() {
@@ -159,6 +189,7 @@ public class BoardController : MonoBehaviour
             return;
         }
         _currentBrick.pivot += Vector2.down;
+        _elapsedTime = 0f;
 
         RenderBrick();
     }
@@ -178,6 +209,7 @@ public class BoardController : MonoBehaviour
 
             if(CastBrick(direction)) return;
 
+            if(input.y < 0) _elapsedTime = 0f;
             _currentBrick.pivot += direction;
             RenderBrick();
         }
@@ -194,11 +226,10 @@ public class BoardController : MonoBehaviour
             while(!CastBrick(Vector2.down)) {
                 _currentBrick.pivot += Vector2.down;
             }
-            pivot += Vector2.up;
-            _currentBrick.pivot = pivot;
 
             RenderBrick();
             PlaceBrick();
+            _elapsedTime = 0f;
         }
     }
 
