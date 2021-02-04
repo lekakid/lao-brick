@@ -249,9 +249,16 @@ public class BoardController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context) {
         if(context.performed) {
             Vector2 input = context.ReadValue<Vector2>();
+            OnMoveDown(input);
+        }
+        if(context.canceled) {
+            OnMoveUp();
+        }
+    }
+
+    public void OnMoveDown(Vector2 input) {
             Vector2 direction = Vector2.zero;
 
-            // TODO: 키를 누르고 있으면 계속 이동
             if(input.x != 0f) {
                 direction = (input.x < 0) ? Vector2.left : Vector2.right;
             }
@@ -261,35 +268,43 @@ public class BoardController : MonoBehaviour
 
             if(_movementHandler != null) StopCoroutine(_movementHandler);
             _movementHandler = StartCoroutine(HandleMove(direction));
-        }
-        if(context.canceled) {
-            StopCoroutine(_movementHandler);
-            _movementHandler = null;
-        }
+    }
+
+    public void OnMoveUp() {
+        StopCoroutine(_movementHandler);
+        _movementHandler = null;
     }
     
     public void OnDrop(InputAction.CallbackContext context) {
         if(context.performed) {
-            int rotation = _currentBrick.rotation;
-            Vector2 pivot = _currentBrick.pivot;
-
-            while(!CastBrick(Vector2.down)) {
-                _currentBrick.pivot += Vector2.down;
-            }
-
-            RenderBrick();
-            PlaceBrick();
-            _elapsedTime = 0f;
+            OnDropDown();
         }
+    }
+
+    public void OnDropDown() {
+        int rotation = _currentBrick.rotation;
+        Vector2 pivot = _currentBrick.pivot;
+
+        while(!CastBrick(Vector2.down)) {
+            _currentBrick.pivot += Vector2.down;
+        }
+
+        RenderBrick();
+        PlaceBrick();
+        _elapsedTime = 0f;
     }
 
     public void OnRotate(InputAction.CallbackContext context) {
         if(context.performed) {
-            int rotation = (_currentBrick.rotation + 1) % 4;
-            if(CastBrick(rotation)) return;
-
-            _currentBrick.rotation = rotation;
-            RenderBrick();
+            OnRotateDown();
         }
+    }
+
+    public void OnRotateDown() {
+        int rotation = (_currentBrick.rotation + 1) % 4;
+        if(CastBrick(rotation)) return;
+
+        _currentBrick.rotation = rotation;
+        RenderBrick();
     }
 }
