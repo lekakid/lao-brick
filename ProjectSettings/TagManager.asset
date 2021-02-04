@@ -44,3 +44,6 @@ TagManager:
   - name: Pause
     uniqueID: 542094525
     locked: 0
+  - name: Title
+    uniqueID: 3121352303
+    locked: 0
