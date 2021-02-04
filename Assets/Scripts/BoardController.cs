@@ -255,14 +255,16 @@ public class BoardController : MonoBehaviour
             if(input.x != 0f) {
                 direction = (input.x < 0) ? Vector2.left : Vector2.right;
             }
-            if(input.y < 0) {
+            else if(input.y < 0) {
                 direction = Vector2.down;
             }
 
+            if(_movementHandler != null) StopCoroutine(_movementHandler);
             _movementHandler = StartCoroutine(HandleMove(direction));
         }
         if(context.canceled) {
             StopCoroutine(_movementHandler);
+            _movementHandler = null;
         }
     }
     
