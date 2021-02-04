@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
@@ -21,5 +21,10 @@ public class BrickGenerator : SerializedMonoBehaviour
     public BrickScriptableObject GetRandomBrick() {
         if(bagQueue.Count < 1) GenerateBag();
         return bagQueue.Dequeue();
+    }
+
+    public BrickScriptableObject GetTopBrickOnBag() {
+        if(bagQueue.Count < 1) GenerateBag();
+        return bagQueue.Peek();
     }
 }
