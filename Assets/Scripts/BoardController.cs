@@ -6,6 +6,9 @@ using Sirenix.OdinInspector;
 
 public class BoardController : MonoBehaviour
 {
+    [BoxGroup("UI")]
+    public SpriteRenderer Preview;
+
     [BoxGroup("Item")]
     public Transform ItemContainer;
 
@@ -61,6 +64,7 @@ public class BoardController : MonoBehaviour
 
         if(!_currentBrick.hasValue) {
             GenerateBrick();
+            ShowPreview();
         }
 
         if(_elapsedTime >= _currentDelay) {
@@ -94,6 +98,11 @@ public class BoardController : MonoBehaviour
         _currentBrick.hasValue = true;
 
         RenderBrick();
+    }
+
+    void ShowPreview() {
+        BrickScriptableObject data = _generator.GetTopBrickOnBag();
+        Preview.sprite = data.Preview;
     }
 
     void PlaceBrick() {
