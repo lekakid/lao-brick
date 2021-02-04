@@ -463,6 +463,7 @@ GameObject:
   - component: {fileID: 167036649}
   - component: {fileID: 167036648}
   - component: {fileID: 167036647}
+  - component: {fileID: 167036650}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -484,7 +485,7 @@ RectTransform:
   - {fileID: 2097961426}
   - {fileID: 1425653444}
   m_Father: {fileID: 2111817520}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -551,6 +552,18 @@ Canvas:
   m_SortingLayerID: -1173614993
   m_SortingOrder: 1
   m_TargetDisplay: 0
+--- !u!225 &167036650
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167036645}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &280703914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1341,7 +1354,7 @@ MonoBehaviour:
     m_ActionName: Tetris/Drop[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
-  m_DefaultActionMap: 
+  m_DefaultActionMap: GAME
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!4 &810150102
@@ -1710,7 +1723,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2111817520}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &999375630
 SpriteRenderer:
@@ -2253,6 +2266,51 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1443980865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1443980866}
+  - component: {fileID: 1443980867}
+  m_Layer: 0
+  m_Name: TitleController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1443980866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443980865}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2111817520}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1443980867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443980865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29a8a1d7dafbddd4c9af0fc0ae427c9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoardController: {fileID: 1232897343}
+  TitleGroupAnimator: {fileID: 2111817522}
 --- !u!1 &1524434966
 GameObject:
   m_ObjectHideFlags: 0
@@ -2653,7 +2711,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2111817520}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1981808141
 SpriteRenderer:
@@ -2969,7 +3027,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2097961429}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1443980867}
+        m_MethodName: OnClickStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2097961429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3018,6 +3087,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2111817520}
   - component: {fileID: 2111817521}
+  - component: {fileID: 2111817522}
   m_Layer: 0
   m_Name: == TITLE ==
   m_TagString: Untagged
@@ -3036,6 +3106,7 @@ Transform:
   m_LocalPosition: {x: -20, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1443980866}
   - {fileID: 167036646}
   - {fileID: 1981808140}
   - {fileID: 999375629}
@@ -3055,6 +3126,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f429cd80c483d314195ee1e4f904b3f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &2111817522
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2111817519}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 193ef09ccfa5f3e459dc2babaa01262a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2118789779
 GameObject:
   m_ObjectHideFlags: 0
@@ -3135,5 +3225,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2111817520}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
