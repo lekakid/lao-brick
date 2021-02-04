@@ -79,8 +79,7 @@ public class BoardController : MonoBehaviour
         _elapsedTime += Time.deltaTime;
     }
 
-    [Button]
-    void StartGame() {
+    public void StartGame() {
         _currentDelay = FallDelay;
         isPlaying = true;
     }
