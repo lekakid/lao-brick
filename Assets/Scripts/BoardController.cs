@@ -9,6 +9,9 @@ public class BoardController : MonoBehaviour
     [BoxGroup("UI")]
     public SpriteRenderer Preview;
 
+    [BoxGroup("Input")]
+    public float RepeatKeyDelay = 0.25f;
+
     [BoxGroup("Item")]
     public Transform ItemContainer;
 
@@ -43,6 +46,8 @@ public class BoardController : MonoBehaviour
     bool isPlaying = false;
     float _currentDelay = 0f;
     float _elapsedTime = 0f;
+
+    Coroutine _movementHandler;
 
     private void Awake() {
         _MappingTable = new MappingItem[10, 20];
@@ -230,6 +235,18 @@ public class BoardController : MonoBehaviour
         }
     }
 
+    IEnumerator HandleMove(Vector2 direction) {
+        while(true) {
+            if(!CastBrick(direction)) {
+                if(direction.y < 0) _elapsedTime = 0f;
+                _currentBrick.pivot += direction;
+                RenderBrick();
+            }
+            
+            yield return new WaitForSeconds(RepeatKeyDelay);
+        }
+    }
+
     public void OnMove(InputAction.CallbackContext context) {
         if(context.performed) {
             Vector2 input = context.ReadValue<Vector2>();
@@ -243,14 +260,10 @@ public class BoardController : MonoBehaviour
                 direction = Vector2.down;
             }
 
-            if(CastBrick(direction)) return;
-
-            if(input.y < 0) _elapsedTime = 0f;
-            _currentBrick.pivot += direction;
-            RenderBrick();
+            _movementHandler = StartCoroutine(HandleMove(direction));
         }
         if(context.canceled) {
-            // TODO: 키를 누르고 있다 떼면 후처리
+            StopCoroutine(_movementHandler);
         }
     }
     

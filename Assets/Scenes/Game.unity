@@ -1736,6 +1736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Preview: {fileID: 386078112}
+  RepeatKeyDelay: 0.15
   ItemContainer: {fileID: 922459072}
   ItemPrefab: {fileID: 6823232494549591856, guid: 056b5ccde0736c04daf56a500e8241d7,
     type: 3}
