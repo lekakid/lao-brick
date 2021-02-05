@@ -8,6 +8,12 @@ public class BoardController : MonoBehaviour
 {
     [BoxGroup("UI")]
     public SpriteRenderer Preview;
+    
+    [BoxGroup("UI")]
+    public Animator GameOverAnimator;
+
+    [BoxGroup("UI")]
+    public Animator DracurinaAnimator;
 
     [BoxGroup("Input")]
     public float RepeatKeyDelay = 0.25f;
@@ -74,13 +80,18 @@ public class BoardController : MonoBehaviour
 
     public void StartGame() {
         _currentDelay = FallDelay;
+        _elapsedTime = 0f;
+        ClearBoard();
+        
         isPlaying = true;
+        GameOverAnimator.SetBool("Toggle", false);
+        DracurinaAnimator.SetBool("Toggle", false);
     }
 
     public void GameOver() {
         isPlaying = false;
-        Debug.Log("게임 오버 됨");
-        // TODO : SHOW GAMEOVER
+        GameOverAnimator.SetBool("Toggle", true);
+        DracurinaAnimator.SetBool("Toggle", true);
     }
 
     void GenerateBrick() {
@@ -233,6 +244,15 @@ public class BoardController : MonoBehaviour
                         _lineCount[y] = _lineCount[y + 1];
                     }
                 }
+            }
+        }
+    }
+
+    void ClearBoard() {
+        for(int y = 0; y < 20; y++) {
+            for(int x = 0; x < 10; x++) {
+                _MappingTable[x, y].Erase();
+                _MappingTable[x, y].exists = false;
             }
         }
     }
