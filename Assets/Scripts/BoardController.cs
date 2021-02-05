@@ -77,6 +77,12 @@ public class BoardController : MonoBehaviour
         isPlaying = true;
     }
 
+    public void GameOver() {
+        isPlaying = false;
+        Debug.Log("게임 오버 됨");
+        // TODO : SHOW GAMEOVER
+    }
+
     void GenerateBrick() {
         BrickScriptableObject data = _generator.GetRandomBrick();
         _currentBrick.pivot = new Vector2(4, 19);
@@ -90,6 +96,12 @@ public class BoardController : MonoBehaviour
                 _currentBrick.lastItem[i] = null;
             }
         }
+
+        if(CastBrick(0)) {
+            GameOver();
+            return;
+        }
+
         _currentBrick.hasValue = true;
 
         RenderBrick();
