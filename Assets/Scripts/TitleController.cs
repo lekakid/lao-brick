@@ -11,6 +11,6 @@ public class TitleController : MonoBehaviour
 
     public void OnClickStart() {
         BoardController.StartGame();
-        TitleGroupAnimator.SetTrigger("out");
+        TitleGroupAnimator.SetBool("Toggle", true);
     }
 }
