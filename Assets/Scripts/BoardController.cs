@@ -108,8 +108,10 @@ public class BoardController : MonoBehaviour
             int x = (int)(_currentBrick.pivot.x + offsets[i].x);
             int y = (int)(_currentBrick.pivot.y + offsets[i].y);
 
-            _MappingTable[x, y].exists = true;
-            _lineCount[y] += 1;
+            if(x < 10 && y < 20) {
+                _MappingTable[x, y].exists = true;
+                _lineCount[y] += 1;
+            }
         }
 
         ClearFulledLine();
