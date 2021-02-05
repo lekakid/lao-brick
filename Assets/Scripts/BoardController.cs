@@ -218,6 +218,7 @@ public class BoardController : MonoBehaviour
                     for(int x = 0; x < 10; x++) {
                         _MappingTable[x, l].exists = false;
                         _MappingTable[x, l].spriteRenderer.sprite = null;
+                        _MappingTable[x, l].transform.rotation = Quaternion.identity;
                     }
                     _itemCount[l] = 0;
                 }
@@ -226,6 +227,7 @@ public class BoardController : MonoBehaviour
                         for(int x = 0; x < 10; x++) {
                             _MappingTable[x, y].exists = _MappingTable[x, y + 1].exists;
                             _MappingTable[x, y].spriteRenderer.sprite = _MappingTable[x, y + 1].spriteRenderer.sprite;
+                            _MappingTable[x, y].transform.rotation = _MappingTable[x, y + 1].transform.rotation;
                         }
                         _itemCount[y] = _itemCount[y + 1];
                     }
