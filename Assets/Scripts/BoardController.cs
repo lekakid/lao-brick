@@ -24,13 +24,8 @@ public class BoardController : MonoBehaviour
     [BoxGroup("Difficulty")]
     public float SpeedUpRate = 0.95f;
 
-    struct MappingItem {
-        public SpriteRenderer spriteRenderer;
-        public Transform transform;
-        public bool exists;
-    }
-    MappingItem[,] _MappingTable;
-    int[] _itemCount;
+    BoardItem[,] _MappingTable;
+    int[] _lineCount;
 
     BrickGenerator _generator;
     struct Brick {
@@ -38,8 +33,7 @@ public class BoardController : MonoBehaviour
         public Vector2 pivot;
         public int rotation;
         public BrickScriptableObject data;
-        public SpriteRenderer[] lastRenderers;
-        public Transform[] lastTransforms;
+        public BoardItem[] lastItem;
     }
     Brick _currentBrick;
 
@@ -50,14 +44,13 @@ public class BoardController : MonoBehaviour
     Coroutine _movementHandler;
 
     private void Awake() {
-        _MappingTable = new MappingItem[10, 20];
-        _itemCount = new int[20];
+        _MappingTable = new BoardItem[10, 20];
+        _lineCount = new int[20];
         for(int y = 0; y < 20; y++) {
             for(int x = 0; x < 10; x++) {
                 GameObject item = Instantiate(ItemPrefab, ItemContainer.localPosition + new Vector3(x, y, 0), Quaternion.identity);
                 item.transform.SetParent(ItemContainer);
-                _MappingTable[x, y].spriteRenderer = item.GetComponent<SpriteRenderer>();
-                _MappingTable[x, y].transform = item.transform;
+                _MappingTable[x, y] = item.GetComponent<BoardItem>();
             }
         }
 
@@ -89,14 +82,12 @@ public class BoardController : MonoBehaviour
         _currentBrick.pivot = new Vector2(4, 19);
         _currentBrick.rotation = 0;
         _currentBrick.data = data;
-        if(_currentBrick.lastRenderers == null && _currentBrick.lastTransforms == null) {
-            _currentBrick.lastRenderers = new SpriteRenderer[4];
-            _currentBrick.lastTransforms = new Transform[4];
+        if(_currentBrick.lastItem == null) {
+            _currentBrick.lastItem = new BoardItem[4];
         }
         else {
             for(int i = 0; i < 4; i++) {
-                _currentBrick.lastRenderers[i] = null;
-                _currentBrick.lastTransforms[i] = null;
+                _currentBrick.lastItem[i] = null;
             }
         }
         _currentBrick.hasValue = true;
@@ -118,7 +109,7 @@ public class BoardController : MonoBehaviour
             int y = (int)(_currentBrick.pivot.y + offsets[i].y);
 
             _MappingTable[x, y].exists = true;
-            _itemCount[y] += 1;
+            _lineCount[y] += 1;
         }
 
         ClearFulledLine();
@@ -127,25 +118,23 @@ public class BoardController : MonoBehaviour
     }
 
     void RenderBrick() {
+        Vector2 pivot = _currentBrick.pivot;
         int rotation = _currentBrick.rotation;
         Vector2[] offsets = _currentBrick.data.Offsets[rotation];
 
         for(int i = 0; i < 4; i++) {
-            if(_currentBrick.lastRenderers[i] != null) {
-                _currentBrick.lastRenderers[i].sprite = null;
-                _currentBrick.lastTransforms[i].rotation = Quaternion.identity;
+            if(_currentBrick.lastItem[i] != null) {
+                _currentBrick.lastItem[i].Erase();
             }
         }
 
         for(int i = 0; i < 4; i++) {
-            int x = (int)(_currentBrick.pivot.x + offsets[i].x);
-            int y = (int)(_currentBrick.pivot.y + offsets[i].y);
+            int x = (int)(pivot.x + offsets[i].x);
+            int y = (int)(pivot.y + offsets[i].y);
 
             if(x < 10 && y < 20) {
-                _currentBrick.lastRenderers[i] = _MappingTable[x, y].spriteRenderer;
-                _currentBrick.lastTransforms[i] = _MappingTable[x, y].transform;
-                _MappingTable[x, y].spriteRenderer.sprite = _currentBrick.data.Blocks[i];
-                _MappingTable[x, y].transform.Rotate(0f, 0f, -90f * rotation);
+                _currentBrick.lastItem[i] = _MappingTable[x, y];
+                _MappingTable[x, y].Render(_currentBrick.data.Blocks[i], rotation);
             }
         }
     }
@@ -213,23 +202,21 @@ public class BoardController : MonoBehaviour
 
     void ClearFulledLine() {
         for(int l = 19; l >= 0; l--) {
-            if(_itemCount[l] == 10) {
+            if(_lineCount[l] == 10) {
                 if(l == 19) {
                     for(int x = 0; x < 10; x++) {
                         _MappingTable[x, l].exists = false;
-                        _MappingTable[x, l].spriteRenderer.sprite = null;
-                        _MappingTable[x, l].transform.rotation = Quaternion.identity;
+                        _MappingTable[x, l].Erase();
                     }
-                    _itemCount[l] = 0;
+                    _lineCount[l] = 0;
                 }
                 else {
                     for(int y = l; y < 19; y++) {
                         for(int x = 0; x < 10; x++) {
                             _MappingTable[x, y].exists = _MappingTable[x, y + 1].exists;
-                            _MappingTable[x, y].spriteRenderer.sprite = _MappingTable[x, y + 1].spriteRenderer.sprite;
-                            _MappingTable[x, y].transform.rotation = _MappingTable[x, y + 1].transform.rotation;
+                            _MappingTable[x, y].Render(_MappingTable[x, y + 1]);
                         }
-                        _itemCount[y] = _itemCount[y + 1];
+                        _lineCount[y] = _lineCount[y + 1];
                     }
                 }
             }
