@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using Sirenix.OdinInspector;
 
@@ -14,6 +15,12 @@ public class BoardController : MonoBehaviour
 
     [BoxGroup("UI")]
     public Animator DracurinaAnimator;
+
+    [BoxGroup("UI")]
+    public Text HighScoreText;
+
+    [BoxGroup("UI")]
+    public Text ScoreText;
 
     [BoxGroup("Input")]
     public PlayerInput PlayerInput;
@@ -36,6 +43,15 @@ public class BoardController : MonoBehaviour
     [BoxGroup("Difficulty")]
     public float SpeedUpRate = 0.95f;
 
+    [BoxGroup("Difficulty")]
+    public int LevelCut = 20;
+
+    [BoxGroup("Score")]
+    public int PlaceBlockScore = 10;
+
+    [BoxGroup("Score")]
+    public int ClearLineScore = 100;
+    
     BoardItem[,] _MappingTable;
     int[] _lineCount;
 
@@ -52,6 +68,20 @@ public class BoardController : MonoBehaviour
     bool isPlaying = false;
     float _currentDelay = 0f;
     float _elapsedTime = 0f;
+
+    int _score = 0;
+    int Score {
+        get {
+            return _score;
+        }
+        set {
+            _score = value;
+            ScoreText.text = string.Format("{0,8:D8}", value);
+        }
+    }
+    int _highscore = 0;
+    int _level = 1;
+    int _removedLine = 0;
 
     Coroutine _movementHandler;
 
@@ -89,6 +119,10 @@ public class BoardController : MonoBehaviour
         _elapsedTime = 0f;
         ClearBoard();
 
+        Score = 0;
+        _level = 1;
+        _removedLine = 0;
+
         PlayerInput.currentActionMap = PlayerInput.actions.FindActionMap("GAME");
         Controller.interactable = true;
         
@@ -100,6 +134,11 @@ public class BoardController : MonoBehaviour
     public void GameOver() {
         PlayerInput.currentActionMap = null;
         Controller.interactable = false;
+
+        if(Score > _highscore) {
+            _highscore = Score;
+            HighScoreText.text = string.Format("{0,8:D8}", _highscore);
+        }
 
         isPlaying = false;
         GameOverAnimator.SetBool("Toggle", true);
@@ -152,6 +191,8 @@ public class BoardController : MonoBehaviour
         ClearFulledLine();
         _currentBrick.hasValue = false;
         _elapsedTime = 0f;
+
+        Score += PlaceBlockScore;
     }
 
     void RenderBrick() {
@@ -258,6 +299,14 @@ public class BoardController : MonoBehaviour
                         }
                         _lineCount[y] = _lineCount[y + 1];
                     }
+                }
+                Score += ClearLineScore * _level;
+                _removedLine += 1;
+                
+                if(_removedLine >= 20) {
+                    _level += 1;
+                    _removedLine -= 20;
+                    _currentDelay *= SpeedUpRate;
                 }
             }
         }
