@@ -7,6 +7,9 @@ public class BoardItem : MonoBehaviour
     public bool exists;
 
     [SerializeField]
+    Animator animator;
+
+    [SerializeField]
     SpriteRenderer spriteRenderer;
     
     public void Render(Sprite sprite, int rotation) {
@@ -22,5 +25,9 @@ public class BoardItem : MonoBehaviour
     public void Erase() {
         spriteRenderer.sprite = null;
         transform.rotation = Quaternion.identity;
+    }
+
+    public void Boom() {
+        animator.SetTrigger("Boom");
     }
 }

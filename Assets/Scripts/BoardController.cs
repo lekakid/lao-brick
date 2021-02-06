@@ -240,6 +240,9 @@ public class BoardController : MonoBehaviour
     void ClearFulledLine() {
         for(int l = 19; l >= 0; l--) {
             if(_lineCount[l] == 10) {
+                for(int x = 0; x < 10; x++) {
+                    _MappingTable[x, l].Boom();
+                }
                 if(l == 19) {
                     for(int x = 0; x < 10; x++) {
                         _MappingTable[x, l].exists = false;
