@@ -16,6 +16,12 @@ public class BoardController : MonoBehaviour
     public Animator DracurinaAnimator;
 
     [BoxGroup("Input")]
+    public PlayerInput PlayerInput;
+
+    [BoxGroup("Input")]
+    public CanvasGroup Controller;
+
+    [BoxGroup("Input")]
     public float RepeatKeyDelay = 0.25f;
 
     [BoxGroup("Item")]
@@ -82,6 +88,9 @@ public class BoardController : MonoBehaviour
         _currentDelay = FallDelay;
         _elapsedTime = 0f;
         ClearBoard();
+
+        PlayerInput.currentActionMap = PlayerInput.actions.FindActionMap("GAME");
+        Controller.interactable = true;
         
         isPlaying = true;
         GameOverAnimator.SetBool("Toggle", false);
@@ -89,6 +98,9 @@ public class BoardController : MonoBehaviour
     }
 
     public void GameOver() {
+        PlayerInput.currentActionMap = null;
+        Controller.interactable = false;
+
         isPlaying = false;
         GameOverAnimator.SetBool("Toggle", true);
         DracurinaAnimator.SetBool("Toggle", true);
