@@ -254,6 +254,7 @@ public class BoardController : MonoBehaviour
                 _MappingTable[x, y].Erase();
                 _MappingTable[x, y].exists = false;
             }
+            _lineCount[y] = 0;
         }
     }
 
