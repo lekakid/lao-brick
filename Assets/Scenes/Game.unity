@@ -1482,7 +1482,7 @@ MonoBehaviour:
   m_Actions: {fileID: -944628639613478452, guid: 11358f844148e8346a7e7125e3d2fd68,
     type: 3}
   m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
+  m_UIInputModule: {fileID: 1921548547}
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -1541,14 +1541,6 @@ MonoBehaviour:
     m_ActionId: 1edf04ae-9e83-4294-bef1-bc1af0db70a1
     m_ActionName: UI/RightClick[/Mouse/rightButton]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 021ab26e-da99-4204-a767-07787f9c9432
-    m_ActionName: UI/TrackedDevicePosition
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e031a5e6-d049-4ebf-8720-16b1cd4a319e
-    m_ActionName: UI/TrackedDeviceOrientation
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1232897343}
         m_MethodName: OnRotate
@@ -1578,8 +1570,16 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: dc83645c-796c-4148-aea8-1dc93c5a5785
     m_ActionName: Tetris/Drop[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 021ab26e-da99-4204-a767-07787f9c9432
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e031a5e6-d049-4ebf-8720-16b1cd4a319e
+    m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Touch
   m_DefaultActionMap: GAME
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
