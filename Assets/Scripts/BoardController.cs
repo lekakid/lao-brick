@@ -62,9 +62,9 @@ public class BoardController : MonoBehaviour
     struct Brick {
         public bool hasValue;
         public Vector2 pivot;
+        public Vector2 dropDistance;
         public int rotation;
         public BrickScriptableObject data;
-        public BoardItem[] lastItem;
     }
     Brick _currentBrick;
 
@@ -172,14 +172,7 @@ public class BoardController : MonoBehaviour
         _currentBrick.pivot = new Vector2(4, 19);
         _currentBrick.rotation = 0;
         _currentBrick.data = data;
-        if(_currentBrick.lastItem == null) {
-            _currentBrick.lastItem = new BoardItem[4];
-        }
-        else {
-            for(int i = 0; i < 4; i++) {
-                _currentBrick.lastItem[i] = null;
-            }
-        }
+        _currentBrick.dropDistance = FindDropDistance();
 
         if(CastBrick(0)) {
             GameOver();
@@ -188,6 +181,7 @@ public class BoardController : MonoBehaviour
 
         _currentBrick.hasValue = true;
 
+        RenderShadow();
         RenderBrick();
     }
 
@@ -223,18 +217,56 @@ public class BoardController : MonoBehaviour
         Vector2[] offsets = _currentBrick.data.Offsets[rotation];
 
         for(int i = 0; i < 4; i++) {
-            if(_currentBrick.lastItem[i] != null) {
-                _currentBrick.lastItem[i].Erase();
+            int x = (int)(pivot.x + offsets[i].x);
+            int y = (int)(pivot.y + offsets[i].y);
+
+            if(x < 10 && y < 20) {
+                _MappingTable[x, y].Render(_currentBrick.data.Blocks[i], rotation);
             }
         }
+    }
+
+    void EraseBrick() {
+        Vector2 pivot = _currentBrick.pivot;
+        int rotation = _currentBrick.rotation;
+        Vector2[] offsets = _currentBrick.data.Offsets[rotation];
 
         for(int i = 0; i < 4; i++) {
             int x = (int)(pivot.x + offsets[i].x);
             int y = (int)(pivot.y + offsets[i].y);
 
             if(x < 10 && y < 20) {
-                _currentBrick.lastItem[i] = _MappingTable[x, y];
-                _MappingTable[x, y].Render(_currentBrick.data.Blocks[i], rotation);
+                _MappingTable[x, y].Erase();
+            }
+        }
+    }
+
+    void RenderShadow() {
+        Vector2 pivot = _currentBrick.pivot + _currentBrick.dropDistance;
+        int rotation = _currentBrick.rotation;
+        Vector2[] offsets = _currentBrick.data.Offsets[rotation];
+
+        for(int i = 0; i < 4; i++) {
+            int x = (int)(pivot.x + offsets[i].x);
+            int y = (int)(pivot.y + offsets[i].y);
+
+            if(x < 10 && y < 20) {
+                _MappingTable[x, y].RenderShadow(_currentBrick.data.Blocks[i], rotation);
+            }
+        }
+    }
+
+    void EraseShadow() {
+        Vector2 pivot = _currentBrick.pivot + _currentBrick.dropDistance;
+        int rotation = _currentBrick.rotation;
+        Vector2[] offsets = _currentBrick.data.Offsets[rotation];
+
+        for(int i = 0; i < 4; i++) {
+            int x = (int)(pivot.x + offsets[i].x);
+            int y = (int)(pivot.y + offsets[i].y);
+
+            if(x < 10 && y < 20) {
+                _MappingTable[x, y].Erase();
             }
         }
     }
@@ -288,13 +320,25 @@ public class BoardController : MonoBehaviour
         return false;
     }
 
+    Vector2 FindDropDistance() {
+        Vector2 dropDistance = Vector2.zero;
+        while(!CastBrick(dropDistance)) {
+            dropDistance += Vector2.down;
+        }
+        return dropDistance + Vector2.up;
+    }
+
     void FallBrick() {
         int rotation = _currentBrick.rotation;
         if(CastBrick(Vector2.down)) {
             PlaceBrick();
             return;
         }
+
+        EraseBrick();
+
         _currentBrick.pivot += Vector2.down;
+        _currentBrick.dropDistance -= Vector2.down;
         _elapsedTime = 0f;
 
         RenderBrick();
@@ -347,8 +391,12 @@ public class BoardController : MonoBehaviour
     IEnumerator HandleMove(Vector2 direction) {
         while(true) {
             if(!CastBrick(direction)) {
+                EraseBrick();
+                EraseShadow();
                 if(direction.y < 0) _elapsedTime = 0f;
                 _currentBrick.pivot += direction;
+                _currentBrick.dropDistance = FindDropDistance();
+                RenderShadow();
                 RenderBrick();
             }
             
@@ -395,9 +443,9 @@ public class BoardController : MonoBehaviour
         int rotation = _currentBrick.rotation;
         Vector2 pivot = _currentBrick.pivot;
 
-        while(!CastBrick(Vector2.down)) {
-            _currentBrick.pivot += Vector2.down;
-        }
+        EraseBrick();
+
+        _currentBrick.pivot += _currentBrick.dropDistance;
 
         RenderBrick();
         PlaceBrick();
@@ -414,7 +462,11 @@ public class BoardController : MonoBehaviour
         int rotation = (_currentBrick.rotation + 1) % 4;
         if(CastBrick(rotation)) return;
 
+        EraseBrick();
+        EraseShadow();
         _currentBrick.rotation = rotation;
+        _currentBrick.dropDistance = FindDropDistance();
+        RenderShadow();
         RenderBrick();
     }
 
