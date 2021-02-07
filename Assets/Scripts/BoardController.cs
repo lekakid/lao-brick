@@ -9,6 +9,9 @@ public class BoardController : MonoBehaviour
 {
     [BoxGroup("UI")]
     public SpriteRenderer Preview;
+
+    [BoxGroup("UI")]
+    public Animator PauseAnimator;
     
     [BoxGroup("UI")]
     public Animator GameOverAnimator;
@@ -85,6 +88,8 @@ public class BoardController : MonoBehaviour
 
     Coroutine _movementHandler;
 
+    InputActionMap _inputMapGame;
+
     private void Awake() {
         _MappingTable = new BoardItem[10, 20];
         _lineCount = new int[20];
@@ -97,6 +102,7 @@ public class BoardController : MonoBehaviour
         }
 
         _generator = GetComponent<BrickGenerator>();
+        _inputMapGame = PlayerInput.actions.FindActionMap("GAME");
     }
 
     private void Update() {
@@ -123,12 +129,28 @@ public class BoardController : MonoBehaviour
         _level = 1;
         _removedLine = 0;
 
-        PlayerInput.currentActionMap = PlayerInput.actions.FindActionMap("GAME");
+        _inputMapGame.Enable();
         Controller.interactable = true;
         
         isPlaying = true;
         GameOverAnimator.SetBool("Toggle", false);
         DracurinaAnimator.SetBool("Toggle", false);
+    }
+
+    public void PauseGame() {
+        Time.timeScale = 0;
+        ItemContainer.gameObject.SetActive(false);
+        PauseAnimator.SetBool("Toggle", true);
+        _inputMapGame.Disable();
+        Controller.interactable = false;
+    }
+
+    public void ResumeGame() {
+        Time.timeScale = 1f;
+        ItemContainer.gameObject.SetActive(true);
+        PauseAnimator.SetBool("Toggle", false);
+        _inputMapGame.Enable();
+        Controller.interactable = true;
     }
 
     public void GameOver() {
@@ -394,5 +416,11 @@ public class BoardController : MonoBehaviour
 
         _currentBrick.rotation = rotation;
         RenderBrick();
+    }
+
+    public void OnPause(InputAction.CallbackContext context) {
+        if(context.performed) {
+            PauseGame();
+        }
     }
 }
