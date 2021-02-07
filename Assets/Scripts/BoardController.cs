@@ -154,7 +154,7 @@ public class BoardController : MonoBehaviour
     }
 
     public void GameOver() {
-        PlayerInput.currentActionMap = null;
+        _inputMapGame.Disable();
         Controller.interactable = false;
 
         if(Score > _highscore) {
