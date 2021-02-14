@@ -25,6 +25,9 @@ public class BoardController : MonoBehaviour
     [BoxGroup("UI")]
     public Text ScoreText;
 
+    [BoxGroup("Sound")]
+    public AudioMixerController AudioMixerController;
+
     [BoxGroup("Input")]
     public PlayerInput PlayerInput;
 
@@ -131,6 +134,8 @@ public class BoardController : MonoBehaviour
 
         _inputMapGame.Enable();
         Controller.interactable = true;
+
+        AudioMixerController.PlayBGM("Normal");
         
         isPlaying = true;
         GameOverAnimator.SetBool("Toggle", false);
@@ -161,6 +166,8 @@ public class BoardController : MonoBehaviour
             _highscore = Score;
             HighScoreText.text = string.Format("{0,8:D8}", _highscore);
         }
+
+        AudioMixerController.StopBGM();
 
         isPlaying = false;
         GameOverAnimator.SetBool("Toggle", true);

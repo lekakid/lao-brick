@@ -3425,6 +3425,7 @@ MonoBehaviour:
   DracurinaAnimator: {fileID: 582865376}
   HighScoreText: {fileID: 1989961685}
   ScoreText: {fileID: 1921445929}
+  AudioMixerController: {fileID: 997216619}
   PlayerInput: {fileID: 810150101}
   Controller: {fileID: 960008503}
   RepeatKeyDelay: 0.15
