@@ -4065,6 +4065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29a8a1d7dafbddd4c9af0fc0ae427c9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioMixerController: {fileID: 997216619}
   BoardController: {fileID: 1232897343}
   TitleGroupAnimator: {fileID: 2111817522}
 --- !u!1 &1453427126
