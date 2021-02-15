@@ -2824,6 +2824,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 34c81d5bbbdd4594486e7e865c97209e, type: 3}
   - {fileID: 8300000, guid: a9d9c568b20f6f345bcf5c6a331cc0d8, type: 3}
   SFXClips:
+  - {fileID: 8300000, guid: 278ff6c41eeabe343a7c555b0603e447, type: 3}
   - {fileID: 8300000, guid: b6b462794b03e214c9d831e3f2397814, type: 3}
   - {fileID: 8300000, guid: dcc50c6032def7944b78ad2d0089d883, type: 3}
   BGMSlider: {fileID: 1869275790}

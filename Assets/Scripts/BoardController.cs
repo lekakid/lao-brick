@@ -219,6 +219,8 @@ public class BoardController : MonoBehaviour
         _elapsedTime = 0f;
 
         Score += PlaceBlockScore;
+
+        AudioMixerController.PlaySFX("Place");
     }
 
     void RenderBrick() {
