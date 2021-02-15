@@ -57,6 +57,9 @@ public class BoardController : MonoBehaviour
 
     [BoxGroup("Score")]
     public int ClearLineScore = 100;
+
+    [BoxGroup("Score")]
+    public int MaxClearLineScore = 500;
     
     BoardItem[,] _MappingTable;
     int[] _lineCount;
@@ -352,7 +355,7 @@ public class BoardController : MonoBehaviour
     }
 
     void ClearFulledLine() {
-        bool needSFX = false;
+        int removedCount = 0;
 
         for(int l = 19; l >= 0; l--) {
             if(_lineCount[l] == 10) {
@@ -384,11 +387,15 @@ public class BoardController : MonoBehaviour
                     _currentDelay *= SpeedUpRate;
                 }
 
-                needSFX = true;
+                removedCount += 1;
             }
         }
 
-        if(needSFX) AudioMixerController.PlaySFX("Destroy");
+        if(removedCount >= 4) {
+            Score += MaxClearLineScore * _level;
+        }
+
+        if(removedCount > 0) AudioMixerController.PlaySFX("Destroy");
     }
 
     void ClearBoard() {

@@ -3438,6 +3438,7 @@ MonoBehaviour:
   LevelCut: 10
   PlaceBlockScore: 10
   ClearLineScore: 100
+  MaxClearLineScore: 500
 --- !u!1 &1282899024
 GameObject:
   m_ObjectHideFlags: 0
