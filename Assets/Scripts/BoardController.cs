@@ -449,8 +449,10 @@ public class BoardController : MonoBehaviour
     }
 
     public void OnMoveUp() {
-        StopCoroutine(_movementHandler);
-        _movementHandler = null;
+        if(_movementHandler != null) {
+            StopCoroutine(_movementHandler);
+            _movementHandler = null;
+        }
     }
     
     public void OnDrop(InputAction.CallbackContext context) {
