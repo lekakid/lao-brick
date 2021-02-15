@@ -352,6 +352,8 @@ public class BoardController : MonoBehaviour
     }
 
     void ClearFulledLine() {
+        bool needSFX = false;
+
         for(int l = 19; l >= 0; l--) {
             if(_lineCount[l] == 10) {
                 for(int x = 0; x < 10; x++) {
@@ -381,8 +383,12 @@ public class BoardController : MonoBehaviour
                     _removedLine -= 20;
                     _currentDelay *= SpeedUpRate;
                 }
+
+                needSFX = true;
             }
         }
+
+        if(needSFX) AudioMixerController.PlaySFX("Destroy");
     }
 
     void ClearBoard() {
