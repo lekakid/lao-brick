@@ -10,6 +10,8 @@ public class TitleController : MonoBehaviour
     BoardController BoardController;
     [SerializeField]
     Animator TitleGroupAnimator;
+    [SerializeField]
+    Animator PauseGroupAnimator;
 
     private void Start() {
         AudioMixerController.PlayBGM("Title");
@@ -18,5 +20,9 @@ public class TitleController : MonoBehaviour
     public void OnClickStart() {
         BoardController.StartGame();
         TitleGroupAnimator.SetBool("Toggle", true);
+    }
+
+    public void OnClickOption() {
+        PauseGroupAnimator.SetBool("Toggle", true);
     }
 }
