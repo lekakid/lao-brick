@@ -17,11 +17,17 @@ public class DPadButton : Selectable
     public UnityEvent OnButtonUp;
 
     public override void OnPointerDown(PointerEventData eventData) {
+        if(!IsActive() || !IsInteractable())
+            return;
+
         base.OnPointerDown(eventData);
         OnButtonDown.Invoke(direction);
     }
 
     public override void OnPointerUp(PointerEventData eventData) {
+        if(!IsActive() || !IsInteractable())
+            return;
+            
         base.OnPointerUp(eventData);
         OnButtonUp.Invoke();
     }
