@@ -171,6 +171,7 @@ public class BoardController : MonoBehaviour
         }
 
         AudioMixerController.StopBGM();
+        AudioMixerController.PlaySFX("Gameover");
 
         isPlaying = false;
         GameOverAnimator.SetBool("Toggle", true);
