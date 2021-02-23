@@ -51,7 +51,8 @@ public class BoardController : MonoBehaviour
     }
     Brick _currentBrick;
 
-    bool isPlaying = false;
+    bool _isPractice = false;
+    bool _isPlaying = false;
     float _currentDelay = 0f;
     float _elapsedTime = 0f;
 
@@ -89,7 +90,7 @@ public class BoardController : MonoBehaviour
     }
 
     private void Update() {
-        if(!isPlaying) return;
+        if(!_isPlaying) return;
 
         if(!_currentBrick.hasValue) {
             GenerateBrick();
@@ -117,9 +118,14 @@ public class BoardController : MonoBehaviour
 
         AudioMixerController.PlayBGM("Normal");
         
-        isPlaying = true;
+        _isPlaying = true;
         GameOverAnimator.SetBool("Toggle", false);
         DracurinaAnimator.SetBool("Toggle", false);
+    }
+
+    public void StartGame(bool isPractice) {
+        _isPractice = isPractice;
+        StartGame();
     }
 
     public void PauseGame() {
@@ -150,7 +156,7 @@ public class BoardController : MonoBehaviour
         AudioMixerController.StopBGM();
         AudioMixerController.PlaySFX("Gameover");
 
-        isPlaying = false;
+        _isPlaying = false;
         GameOverAnimator.SetBool("Toggle", true);
         DracurinaAnimator.SetBool("Toggle", true);
     }
@@ -361,7 +367,7 @@ public class BoardController : MonoBehaviour
                 Score += ClearLineScore * _level;
                 _removedLine += 1;
                 
-                if(_removedLine >= 20) {
+                if(!_isPractice && _removedLine >= 20) {
                     _level += 1;
                     _removedLine -= 20;
                     _currentDelay *= SpeedUpRate;

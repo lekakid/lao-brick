@@ -11,6 +11,8 @@ public class TitleController : MonoBehaviour
     [SerializeField]
     Animator TitleGroupAnimator;
     [SerializeField]
+    ModeController ModeController;
+    [SerializeField]
     Animator PauseGroupAnimator;
 
     private void Start() {
@@ -18,8 +20,8 @@ public class TitleController : MonoBehaviour
     }
 
     public void OnClickStart() {
-        BoardController.StartGame();
         TitleGroupAnimator.SetBool("Toggle", true);
+        ModeController.Show();
     }
 
     public void OnClickOption() {
