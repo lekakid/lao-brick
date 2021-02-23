@@ -4824,9 +4824,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioMixerController: {fileID: 997216619}
   BoardController: {fileID: 1232897343}
-  TitleGroupAnimator: {fileID: 2111817522}
+  TitleAnimator: {fileID: 2111817522}
   ModeController: {fileID: 1995824946}
   PauseGroupAnimator: {fileID: 1158811582}
+  StartButton: {fileID: 0}
+  isFocus: 0
 --- !u!1 &1453427126
 GameObject:
   m_ObjectHideFlags: 0
@@ -6236,6 +6238,7 @@ MonoBehaviour:
   boardController: {fileID: 1232897343}
   ModeAnimator: {fileID: 1028511689}
   PracticeButton: {fileID: 2019554821}
+  isFocus: 0
 --- !u!1 &2019554821
 GameObject:
   m_ObjectHideFlags: 0
