@@ -7,58 +7,35 @@ using Sirenix.OdinInspector;
 
 public class BoardController : MonoBehaviour
 {
-    [BoxGroup("UI")]
+    [Header("UI")]
     public SpriteRenderer Preview;
-
-    [BoxGroup("UI")]
     public Animator PauseAnimator;
-    
-    [BoxGroup("UI")]
     public Animator GameOverAnimator;
-
-    [BoxGroup("UI")]
     public Animator DracurinaAnimator;
-
-    [BoxGroup("UI")]
     public Text HighScoreText;
-
-    [BoxGroup("UI")]
     public Text ScoreText;
 
-    [BoxGroup("Sound")]
+    [Header("Sound")]
     public AudioMixerController AudioMixerController;
 
-    [BoxGroup("Input")]
+    [Header("Input")]
     public PlayerInput PlayerInput;
-
-    [BoxGroup("Input")]
     public CanvasGroup Controller;
-
-    [BoxGroup("Input")]
     public float RepeatKeyDelay = 0.25f;
 
-    [BoxGroup("Item")]
+    [Header("Item")]
     public Transform ItemContainer;
-
-    [BoxGroup("Item"), AssetsOnly]
+    [AssetsOnly]
     public GameObject ItemPrefab;
 
-    [BoxGroup("Difficulty")]
+    [Header("Difficulty")]
     public float FallDelay = 1.5f;
-    
-    [BoxGroup("Difficulty")]
     public float SpeedUpRate = 0.95f;
-
-    [BoxGroup("Difficulty")]
     public int LevelCut = 20;
 
-    [BoxGroup("Score")]
+    [Header("Score")]
     public int PlaceBlockScore = 10;
-
-    [BoxGroup("Score")]
     public int ClearLineScore = 100;
-
-    [BoxGroup("Score")]
     public int MaxClearLineScore = 500;
     
     BoardItem[,] _MappingTable;
