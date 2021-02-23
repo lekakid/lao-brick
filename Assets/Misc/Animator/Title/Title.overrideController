@@ -435,7 +435,7 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Title Controller
+  m_Name: Title
   m_Controller: {fileID: 9100000, guid: a5e844d8bfc5be94d9996b72b903f0af, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: -15351165419755747, guid: a5e844d8bfc5be94d9996b72b903f0af,
