@@ -2,25 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
-public class ModeController : MonoBehaviour
+public class PauseController : MonoBehaviour
 {
     [SerializeField]
     BoardController boardController;
     [SerializeField]
-    Animator ModeAnimator;
+    Animator PauseAnimator;
     [SerializeField]
-    GameObject PracticeButton;
+    GameObject ResumeButton;
     [SerializeField]
     bool isFocus;
 
     public void Show() {
-        ModeAnimator.SetBool("Toggle", true);
+        PauseAnimator.SetBool("Toggle", true);
         isFocus = true;
     }
 
     public void Hide() {
-        ModeAnimator.SetBool("Toggle", false);
+        PauseAnimator.SetBool("Toggle", false);
         isFocus = false;
         EventSystem.current.SetSelectedGameObject(null);
     }
@@ -29,16 +30,18 @@ public class ModeController : MonoBehaviour
         if(!isFocus) return;
         if(EventSystem.current.currentSelectedGameObject) return;
 
-        EventSystem.current.SetSelectedGameObject(PracticeButton);
+        EventSystem.current.SetSelectedGameObject(ResumeButton);
     }
 
-    public void OnClickPractice() {
-        boardController.StartGame(true);
+    public void OnClickResume() {
+        if(!isFocus) return;
+        boardController.ResumeGame();
         Hide();
     }
 
-    public void OnClickStandard() {
-        boardController.StartGame(false);
-        Hide();
+    public void OnResume(InputAction.CallbackContext context) {
+        if(context.performed) {
+            OnClickResume();
+        }
     }
 }

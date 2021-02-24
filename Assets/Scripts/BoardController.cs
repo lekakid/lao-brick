@@ -8,8 +8,8 @@ using Sirenix.OdinInspector;
 public class BoardController : MonoBehaviour
 {
     [Header("UI")]
+    public PauseController PauseController;
     public SpriteRenderer Preview;
-    public Animator PauseAnimator;
     public Animator GameOverAnimator;
     public Animator DracurinaAnimator;
     public Text HighScoreText;
@@ -131,7 +131,7 @@ public class BoardController : MonoBehaviour
     public void PauseGame() {
         Time.timeScale = 0;
         ItemContainer.gameObject.SetActive(false);
-        PauseAnimator.SetBool("Toggle", true);
+        PauseController.Show();
         _inputMapGame.Disable();
         Controller.interactable = false;
     }
@@ -139,7 +139,7 @@ public class BoardController : MonoBehaviour
     public void ResumeGame() {
         Time.timeScale = 1f;
         ItemContainer.gameObject.SetActive(true);
-        PauseAnimator.SetBool("Toggle", false);
+        PauseController.Hide();
         _inputMapGame.Enable();
         Controller.interactable = true;
     }
