@@ -7,7 +7,9 @@ using UnityEngine.InputSystem;
 public class PauseController : MonoBehaviour
 {
     [SerializeField]
-    BoardController boardController;
+    BoardController BoardController;
+    [SerializeField]
+    ModeController ModeController;
     [SerializeField]
     Animator PauseAnimator;
     [SerializeField]
@@ -33,9 +35,15 @@ public class PauseController : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(ResumeButton);
     }
 
+    public void OnClickModeSelect() {
+        BoardController.ResetGame();
+        ModeController.Show();
+        Hide();
+    }
+
     public void OnClickResume() {
         if(!isFocus) return;
-        boardController.ResumeGame();
+        BoardController.ResumeGame();
         Hide();
     }
 

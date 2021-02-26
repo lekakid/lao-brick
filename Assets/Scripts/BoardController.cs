@@ -105,22 +105,10 @@ public class BoardController : MonoBehaviour
     }
 
     public void StartGame() {
-        _currentDelay = FallDelay;
-        _elapsedTime = 0f;
-        ClearBoard();
-
-        Score = 0;
-        _level = 1;
-        _removedLine = 0;
-
-        _inputMapGame.Enable();
-        Controller.interactable = true;
-
+        ResetGame();
+        Time.timeScale = 1f;
+        ItemContainer.gameObject.SetActive(true);
         AudioMixerController.PlayBGM("Normal");
-        
-        _isPlaying = true;
-        GameOverAnimator.SetBool("Toggle", false);
-        DracurinaAnimator.SetBool("Toggle", false);
     }
 
     public void StartGame(bool isPractice) {
@@ -139,9 +127,27 @@ public class BoardController : MonoBehaviour
     public void ResumeGame() {
         Time.timeScale = 1f;
         ItemContainer.gameObject.SetActive(true);
-        PauseController.Hide();
         _inputMapGame.Enable();
         Controller.interactable = true;
+    }
+    
+    public void ResetGame() {
+        _currentDelay = FallDelay;
+        _elapsedTime = 0f;
+        ClearBoard();
+        GenerateBrick();
+        ShowPreview();
+
+        Score = 0;
+        _level = 1;
+        _removedLine = 0;
+
+        _inputMapGame.Enable();
+        Controller.interactable = true;
+        
+        _isPlaying = true;
+        GameOverAnimator.SetBool("Toggle", false);
+        DracurinaAnimator.SetBool("Toggle", false);
     }
 
     public void GameOver() {
