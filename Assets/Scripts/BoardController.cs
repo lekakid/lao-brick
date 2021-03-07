@@ -107,6 +107,9 @@ public class BoardController : MonoBehaviour
 
     public void StartGame() {
         ResetGame();
+        _inputMapGame.Enable();
+        Controller.interactable = true;
+        
         Time.timeScale = 1f;
         ItemContainer.gameObject.SetActive(true);
         AudioMixerController.PlayBGM("Normal");
@@ -142,9 +145,6 @@ public class BoardController : MonoBehaviour
         Score = 0;
         _level = 1;
         _removedLine = 0;
-
-        _inputMapGame.Enable();
-        Controller.interactable = true;
         
         _isPlaying = true;
         GameOverAnimator.SetBool("Toggle", false);
