@@ -71,6 +71,7 @@ public class BoardController : MonoBehaviour
     int _removedLine = 0;
 
     Coroutine _movementHandler;
+    Coroutine _landingHandler;
 
     InputActionMap _inputMapGame;
 
@@ -400,12 +401,13 @@ public class BoardController : MonoBehaviour
         }
     }
 
-    IEnumerator HandleMove(Vector2 direction) {
+    IEnumerator HandleMove(float input) {
         while(true) {
+            Vector2 direction = new Vector2(input, 0);
+
             if(!CastBrick(direction)) {
                 EraseBrick();
                 EraseShadow();
-                if(direction.y < 0) _elapsedTime = 0f;
                 _currentBrick.pivot += direction;
                 _currentBrick.dropDistance = FindDropDistance();
                 RenderShadow();
@@ -418,7 +420,7 @@ public class BoardController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context) {
         if(context.performed) {
-            Vector2 input = context.ReadValue<Vector2>();
+            float input = context.ReadValue<float>();
             OnMoveDown(input);
         }
         if(context.canceled) {
@@ -426,24 +428,55 @@ public class BoardController : MonoBehaviour
         }
     }
 
-    public void OnMoveDown(Vector2 input) {
-            Vector2 direction = Vector2.zero;
-
-            if(input.x != 0f) {
-                direction = (input.x < 0) ? Vector2.left : Vector2.right;
-            }
-            else if(input.y < 0) {
-                direction = Vector2.down;
-            }
-
-            if(_movementHandler != null) StopCoroutine(_movementHandler);
-            _movementHandler = StartCoroutine(HandleMove(direction));
+    public void OnMoveDown(float input) {
+        if(_movementHandler == null) {
+            _movementHandler = StartCoroutine(HandleMove(input));
+        }
     }
 
     public void OnMoveUp() {
         if(_movementHandler != null) {
             StopCoroutine(_movementHandler);
             _movementHandler = null;
+        }
+    }
+
+    IEnumerator HandleLand() {
+        while(true) {
+            Vector2 direction = new Vector2(0, -1);
+
+            if(!CastBrick(direction)) {
+                EraseBrick();
+                EraseShadow();
+                _currentBrick.pivot += direction;
+                _currentBrick.dropDistance = FindDropDistance();
+                RenderShadow();
+                RenderBrick();
+            }
+            
+            yield return new WaitForSeconds(RepeatKeyDelay);
+        }
+    }
+
+    public void OnLand(InputAction.CallbackContext context) {
+        if(context.performed) {
+            OnLandDown();
+        }
+        if(context.canceled) {
+            OnLandUp();
+        }
+    }
+
+    public void OnLandDown() {
+        if(_landingHandler == null) {
+            _landingHandler = StartCoroutine(HandleLand());
+        }
+    }
+
+    public void OnLandUp() {
+        if(_landingHandler != null) {
+            StopCoroutine(_landingHandler);
+            _landingHandler = null;
         }
     }
     

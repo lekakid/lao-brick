@@ -14,6 +14,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Land",
+                    "type": "Button",
+                    "id": "51fd8717-ae0c-4de0-bd67-1e4940b8264b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Rotate",
                     "type": "Button",
                     "id": "06c94fdf-2b66-4071-871e-4a789a6ad265",
@@ -42,7 +50,7 @@
                 {
                     "name": "Gamepad",
                     "id": "e5b2eb9d-5fc6-4a88-b668-32a368bc04f4",
-                    "path": "2DVector",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -51,18 +59,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "down",
-                    "id": "e8c1af52-ec57-4452-9c5e-de0dc5f7852f",
-                    "path": "<Gamepad>/leftStick/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
+                    "name": "Negative",
                     "id": "e01e5281-71bc-4e56-a248-adb263fb4553",
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
@@ -73,7 +70,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
+                    "name": "Positive",
                     "id": "20ac1941-0018-44bd-a4e6-badb28b8a9e4",
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
@@ -86,7 +83,7 @@
                 {
                     "name": "D-Pad",
                     "id": "e7752ade-7264-46ff-99b6-843de22f57a8",
-                    "path": "2DVector",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -95,18 +92,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "down",
-                    "id": "07bcb65c-22e4-49a9-bdaa-2bcc8faf7dee",
-                    "path": "<Gamepad>/dpad/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
+                    "name": "Negative",
                     "id": "a2314d84-d4f5-4190-b612-29fc9e4204c7",
                     "path": "<Gamepad>/dpad/left",
                     "interactions": "",
@@ -117,7 +103,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
+                    "name": "Positive",
                     "id": "dfdb7d92-29df-4391-90d3-1560a1409645",
                     "path": "<Gamepad>/dpad/right",
                     "interactions": "",
@@ -130,7 +116,7 @@
                 {
                     "name": "WASD",
                     "id": "00ca640b-d935-4593-8157-c05846ea39b3",
-                    "path": "Dpad",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -139,18 +125,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "down",
-                    "id": "1c5327b5-f71c-4f60-99c7-4e737386f1d1",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
+                    "name": "Negative",
                     "id": "2e46982e-44cc-431b-9f0b-c11910bf467a",
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
@@ -161,7 +136,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
+                    "name": "Positive",
                     "id": "77bff152-3580-4b21-b6de-dcd0c7e41164",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
@@ -245,6 +220,39 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "44fe815b-050f-417b-b62f-693666cf1ddf",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Land",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e8a9fadb-eecd-4ec2-a639-9efc782d471a",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Land",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d488dc9b-324d-4c3c-97e0-e4fc2c638fad",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Land",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
