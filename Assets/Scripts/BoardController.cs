@@ -117,6 +117,9 @@ public class BoardController : MonoBehaviour
 
     public void StartGame(bool isPractice) {
         _isPractice = isPractice;
+        string mode = isPractice ? "Practice" : "Standard";
+        _highscore = PlayerPrefs.GetInt($"HighScore_{mode}", 0);
+        HighScoreText.text = string.Format("{0,8:D8}", _highscore);
         StartGame();
     }
 
@@ -157,6 +160,8 @@ public class BoardController : MonoBehaviour
 
         if(Score > _highscore) {
             _highscore = Score;
+            string mode = _isPractice ? "Practice" : "Standard";
+            PlayerPrefs.SetInt($"HighScore_{mode}", _highscore);
             HighScoreText.text = string.Format("{0,8:D8}", _highscore);
         }
 
