@@ -206,6 +206,7 @@ public class BoardController : MonoBehaviour
 
             if(x < 10 && y < 20) {
                 _MappingTable[x, y].exists = true;
+                _MappingTable[x, y].Place();
                 _lineCount[y] += 1;
             }
         }

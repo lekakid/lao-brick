@@ -86,6 +86,9 @@ TextureImporter:
   - first:
       213: 790756284944435083
     second: Z4
+  - first:
+      213: 5832171855535021699
+    second: PlaceEffect
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -186,8 +189,8 @@ TextureImporter:
       name: O1
       rect:
         serializedVersion: 2
-        x: 19
-        y: 731
+        x: 22
+        y: 876
         width: 100
         height: 100
       alignment: 0
@@ -207,8 +210,8 @@ TextureImporter:
       name: O2
       rect:
         serializedVersion: 2
-        x: 125
-        y: 731
+        x: 123
+        y: 876
         width: 100
         height: 100
       alignment: 0
@@ -228,8 +231,8 @@ TextureImporter:
       name: T1
       rect:
         serializedVersion: 2
-        x: 363
-        y: 732
+        x: 360
+        y: 877
         width: 100
         height: 100
       alignment: 0
@@ -249,8 +252,8 @@ TextureImporter:
       name: O3
       rect:
         serializedVersion: 2
-        x: 19
-        y: 625
+        x: 22
+        y: 775
         width: 100
         height: 100
       alignment: 0
@@ -270,8 +273,8 @@ TextureImporter:
       name: O4
       rect:
         serializedVersion: 2
-        x: 125
-        y: 625
+        x: 123
+        y: 775
         width: 100
         height: 100
       alignment: 0
@@ -291,8 +294,8 @@ TextureImporter:
       name: T2
       rect:
         serializedVersion: 2
-        x: 260
-        y: 629
+        x: 259
+        y: 776
         width: 100
         height: 100
       alignment: 0
@@ -312,8 +315,8 @@ TextureImporter:
       name: T3
       rect:
         serializedVersion: 2
-        x: 363
-        y: 629
+        x: 360
+        y: 776
         width: 100
         height: 100
       alignment: 0
@@ -333,8 +336,8 @@ TextureImporter:
       name: T4
       rect:
         serializedVersion: 2
-        x: 466
-        y: 629
+        x: 461
+        y: 776
         width: 100
         height: 100
       alignment: 0
@@ -354,8 +357,8 @@ TextureImporter:
       name: I1
       rect:
         serializedVersion: 2
-        x: 22
-        y: 495
+        x: 21
+        y: 643
         width: 100
         height: 100
       alignment: 0
@@ -375,8 +378,8 @@ TextureImporter:
       name: I2
       rect:
         serializedVersion: 2
-        x: 125
-        y: 495
+        x: 122
+        y: 643
         width: 100
         height: 100
       alignment: 0
@@ -396,9 +399,9 @@ TextureImporter:
       name: I3
       rect:
         serializedVersion: 2
-        x: 228
-        y: 495
-        width: 99
+        x: 223
+        y: 643
+        width: 100
         height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -417,9 +420,9 @@ TextureImporter:
       name: I4
       rect:
         serializedVersion: 2
-        x: 330
-        y: 495
-        width: 101
+        x: 325
+        y: 643
+        width: 100
         height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -438,8 +441,8 @@ TextureImporter:
       name: L1
       rect:
         serializedVersion: 2
-        x: 226
-        y: 363
+        x: 222
+        y: 528
         width: 100
         height: 100
       alignment: 0
@@ -459,8 +462,8 @@ TextureImporter:
       name: J1
       rect:
         serializedVersion: 2
-        x: 356
-        y: 363
+        x: 350
+        y: 528
         width: 100
         height: 100
       alignment: 0
@@ -481,7 +484,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 20
-        y: 260
+        y: 427
         width: 100
         height: 100
       alignment: 0
@@ -501,8 +504,8 @@ TextureImporter:
       name: L3
       rect:
         serializedVersion: 2
-        x: 123
-        y: 260
+        x: 121
+        y: 427
         width: 100
         height: 100
       alignment: 0
@@ -522,8 +525,8 @@ TextureImporter:
       name: L4
       rect:
         serializedVersion: 2
-        x: 226
-        y: 260
+        x: 222
+        y: 427
         width: 100
         height: 100
       alignment: 0
@@ -543,8 +546,8 @@ TextureImporter:
       name: J2
       rect:
         serializedVersion: 2
-        x: 356
-        y: 260
+        x: 350
+        y: 427
         width: 100
         height: 100
       alignment: 0
@@ -564,8 +567,8 @@ TextureImporter:
       name: J3
       rect:
         serializedVersion: 2
-        x: 459
-        y: 260
+        x: 451
+        y: 427
         width: 100
         height: 100
       alignment: 0
@@ -585,8 +588,8 @@ TextureImporter:
       name: J4
       rect:
         serializedVersion: 2
-        x: 562
-        y: 260
+        x: 552
+        y: 427
         width: 100
         height: 100
       alignment: 0
@@ -606,8 +609,8 @@ TextureImporter:
       name: S1
       rect:
         serializedVersion: 2
-        x: 127
-        y: 124
+        x: 125
+        y: 310
         width: 100
         height: 100
       alignment: 0
@@ -627,8 +630,8 @@ TextureImporter:
       name: S2
       rect:
         serializedVersion: 2
-        x: 230
-        y: 124
+        x: 226
+        y: 310
         width: 100
         height: 100
       alignment: 0
@@ -648,8 +651,8 @@ TextureImporter:
       name: Z1
       rect:
         serializedVersion: 2
-        x: 390
-        y: 124
+        x: 350
+        y: 310
         width: 100
         height: 100
       alignment: 0
@@ -669,8 +672,8 @@ TextureImporter:
       name: Z2
       rect:
         serializedVersion: 2
-        x: 493
-        y: 124
+        x: 451
+        y: 310
         width: 100
         height: 100
       alignment: 0
@@ -691,7 +694,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 24
-        y: 21
+        y: 208
         width: 100
         height: 100
       alignment: 0
@@ -711,8 +714,8 @@ TextureImporter:
       name: S4
       rect:
         serializedVersion: 2
-        x: 127
-        y: 21
+        x: 125
+        y: 209
         width: 100
         height: 100
       alignment: 0
@@ -732,8 +735,8 @@ TextureImporter:
       name: Z3
       rect:
         serializedVersion: 2
-        x: 493
-        y: 21
+        x: 451
+        y: 209
         width: 100
         height: 100
       alignment: 0
@@ -753,8 +756,8 @@ TextureImporter:
       name: Z4
       rect:
         serializedVersion: 2
-        x: 596
-        y: 21
+        x: 552
+        y: 209
         width: 100
         height: 100
       alignment: 0
@@ -766,6 +769,27 @@ TextureImporter:
       bones: []
       spriteID: b87450cc6a459fa00800000000000000
       internalID: 790756284944435083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlaceEffect
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 643
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38e1236076900f050800000000000000
+      internalID: 5832171855535021699
       vertices: []
       indices: 
       edges: []

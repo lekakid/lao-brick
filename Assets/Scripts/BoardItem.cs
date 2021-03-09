@@ -42,4 +42,8 @@ public class BoardItem : MonoBehaviour
     public void Boom() {
         animator.SetTrigger("Boom");
     }
+
+    public void Place() {
+        animator.SetTrigger("Place");
+    }
 }
