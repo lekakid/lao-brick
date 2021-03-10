@@ -52,4 +52,8 @@ public class PauseController : MonoBehaviour
             OnClickResume();
         }
     }
+
+    public void OnClickQuit() {
+        Application.Quit();
+    }
 }
