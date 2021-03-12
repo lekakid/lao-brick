@@ -548,28 +548,6 @@ ScriptedImporter:
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 1509, y: -877}
-  - name: O
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 1959
-      y: 3589
-      width: 204
-      height: 204
-    spriteID: b1978d64ddb60734a8a4f771d9ffea52
-    internalID: 0
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    parentGroupIndex: -1
-    uvTransform: {x: 721, y: 1581}
   - name: i
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -746,6 +724,28 @@ ScriptedImporter:
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 1510, y: -1513}
+  - name: O
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 2468
+      y: 3105
+      width: 206
+      height: 206
+    spriteID: 951575535072069469b4f24a6f1d0121
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1237, y: 1099}
   rigSpriteImportData:
   - name: Z
     originalName: 
@@ -1759,9 +1759,9 @@ ScriptedImporter:
     spriteName: O
     isGroup: 0
     parentIndex: 27
-    spriteID: b1978d64ddb60734a8a4f771d9ffea52
-    layerID: 72
-    mosaicPosition: {x: 1959, y: 3589}
+    spriteID: 951575535072069469b4f24a6f1d0121
+    layerID: 87
+    mosaicPosition: {x: 2468, y: 3105}
   - name: i
     spriteName: i
     isGroup: 0
