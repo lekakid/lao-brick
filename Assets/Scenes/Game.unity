@@ -4400,7 +4400,7 @@ MonoBehaviour:
   ItemPrefab: {fileID: 6823232494549591856, guid: 056b5ccde0736c04daf56a500e8241d7,
     type: 3}
   FallDelay: 1.5
-  SpeedUpRate: 0.9
+  SpeedUpRate: 0.85
   LevelCut: 10
   PlaceBlockScore: 10
   ClearLineScore: 100
