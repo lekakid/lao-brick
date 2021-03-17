@@ -361,22 +361,20 @@ public class BoardController : MonoBehaviour
                 for(int x = 0; x < 10; x++) {
                     _MappingTable[x, l].Boom();
                 }
-                if(l == 19) {
+
+                for(int y = l; y < 19; y++) {
                     for(int x = 0; x < 10; x++) {
-                        _MappingTable[x, l].exists = false;
-                        _MappingTable[x, l].Erase();
+                        _MappingTable[x, y].exists = _MappingTable[x, y + 1].exists;
+                        _MappingTable[x, y].Render(_MappingTable[x, y + 1]);
                     }
-                    _lineCount[l] = 0;
+                    _lineCount[y] = _lineCount[y + 1];
                 }
-                else {
-                    for(int y = l; y < 19; y++) {
-                        for(int x = 0; x < 10; x++) {
-                            _MappingTable[x, y].exists = _MappingTable[x, y + 1].exists;
-                            _MappingTable[x, y].Render(_MappingTable[x, y + 1]);
-                        }
-                        _lineCount[y] = _lineCount[y + 1];
-                    }
+                for(int x = 0; x < 10; x++) {
+                    _MappingTable[x, 19].exists = false;
+                    _MappingTable[x, 19].Erase();
                 }
+                _lineCount[19] = 0;
+                
                 Score += ClearLineScore * _level;
                 _removedLine += 1;
                 
