@@ -13,7 +13,7 @@ public class GameDataSO : ScriptableObject
 
     [Header("Events")]
     [SerializeField]
-    GameEvent OnModifiedScore;
+    GameEvent ModifiedScoreEvent;
 
     string _mode = "";
     int _highScore;
@@ -73,7 +73,7 @@ public class GameDataSO : ScriptableObject
 
         LoadHighScore();
         _score = 0;
-        OnModifiedScore.Invoke();
+        ModifiedScoreEvent.Invoke();
 
         _currentFallDelay = FallDelay;
     }
@@ -105,7 +105,7 @@ public class GameDataSO : ScriptableObject
         if(_score > _highScore) {
             _highScore = _score;
         }
-        OnModifiedScore.Invoke();
+        ModifiedScoreEvent.Invoke();
     }
 
     public void RaiseLevel() {
