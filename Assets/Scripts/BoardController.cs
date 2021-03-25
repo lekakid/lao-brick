@@ -10,8 +10,6 @@ public class BoardController : MonoBehaviour
     [Header("UI")]
     public PauseController PauseController;
     public SpriteRenderer Preview;
-    public Animator GameOverAnimator;
-    public Animator DracurinaAnimator;
 
     [Header("Sound")]
     public AudioMixerController AudioMixerController;
@@ -28,6 +26,10 @@ public class BoardController : MonoBehaviour
 
     [Header("GameData")]
     public GameDataSO GameData;
+
+    [Header("Events")]
+    public GameEvent StartEvent;
+    public GameEvent GameOverEvent;
 
     BrickGenerator BrickGenerator;
 
@@ -75,6 +77,8 @@ public class BoardController : MonoBehaviour
         ItemContainer.gameObject.SetActive(true);
         AudioMixerController.PlayBGM("Normal");
 
+        StartEvent.Invoke();
+
         _isPlaying = true;
     }
 
@@ -104,9 +108,6 @@ public class BoardController : MonoBehaviour
         ShowPreview();
 
         GameData.Initilaize();
-        
-        GameOverAnimator.SetBool("Toggle", false);
-        DracurinaAnimator.SetBool("Toggle", false);
     }
 
     public void GameOver() {
@@ -115,12 +116,9 @@ public class BoardController : MonoBehaviour
 
         AudioMixerController.StopBGM();
         AudioMixerController.PlaySFX("Gameover");
-
-        GameData.SaveHighScore();
+        GameOverEvent.Invoke();
 
         _isPlaying = false;
-        GameOverAnimator.SetBool("Toggle", true);
-        DracurinaAnimator.SetBool("Toggle", true);
     }
 
     void GenerateBrick() {
