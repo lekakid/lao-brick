@@ -11,9 +11,6 @@ public class BoardController : MonoBehaviour
     public PauseController PauseController;
     public SpriteRenderer Preview;
 
-    [Header("Sound")]
-    public AudioMixerController AudioMixerController;
-
     [Header("Item")]
     public Transform ItemContainer;
     [AssetsOnly]
@@ -30,6 +27,8 @@ public class BoardController : MonoBehaviour
     [Header("Events")]
     public GameEvent StartEvent;
     public GameEvent GameOverEvent;
+    public GameEvent PlaceBrickEvent;
+    public GameEvent ClearLineEvent;
 
     BrickGenerator BrickGenerator;
 
@@ -75,7 +74,6 @@ public class BoardController : MonoBehaviour
         
         Time.timeScale = 1f;
         ItemContainer.gameObject.SetActive(true);
-        AudioMixerController.PlayBGM("Normal");
 
         StartEvent.Invoke();
 
@@ -114,8 +112,6 @@ public class BoardController : MonoBehaviour
         _inputMapGame.Disable();
         Controller.interactable = false;
 
-        AudioMixerController.StopBGM();
-        AudioMixerController.PlaySFX("Gameover");
         GameOverEvent.Invoke();
 
         _isPlaying = false;
@@ -161,7 +157,7 @@ public class BoardController : MonoBehaviour
 
         GameData.AddScore(GameDataSO.ScoreType.PLACE);
 
-        AudioMixerController.PlaySFX("Place");
+        PlaceBrickEvent.Invoke();
     }
 
     void RenderBrick() {
@@ -312,7 +308,7 @@ public class BoardController : MonoBehaviour
             GameData.AddScore(GameDataSO.ScoreType.FULLCLEAR);
         }
 
-        if(removedCount > 0) AudioMixerController.PlaySFX("Destroy");
+        if(removedCount > 0) ClearLineEvent.Invoke();
     }
 
     void ClearBoard() {

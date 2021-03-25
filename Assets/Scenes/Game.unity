@@ -4536,6 +4536,10 @@ GameObject:
   - component: {fileID: 1232897341}
   - component: {fileID: 1232897343}
   - component: {fileID: 1232897342}
+  - component: {fileID: 1232897345}
+  - component: {fileID: 1232897344}
+  - component: {fileID: 1232897347}
+  - component: {fileID: 1232897346}
   m_Layer: 0
   m_Name: BoardController
   m_TagString: Untagged
@@ -4600,7 +4604,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PauseController: {fileID: 267150418}
   Preview: {fileID: 386078112}
-  AudioMixerController: {fileID: 997216619}
   ItemContainer: {fileID: 922459072}
   ItemPrefab: {fileID: 6823232494549591856, guid: 056b5ccde0736c04daf56a500e8241d7,
     type: 3}
@@ -4611,6 +4614,127 @@ MonoBehaviour:
   StartEvent: {fileID: 11400000, guid: ff7a3f1a0b392de4ba2a22bbb211fd69, type: 2}
   PauseEvent: {fileID: 11400000, guid: 6bc1e11df8e4b1f4691afb01009a4996, type: 2}
   GameOverEvent: {fileID: 11400000, guid: 2903d192ab3176340b0a13e981b4d17e, type: 2}
+  PlaceBrickEvent: {fileID: 11400000, guid: c7777ee429e941a4892ed6a7d6ab0814, type: 2}
+  ClearLineEvent: {fileID: 11400000, guid: f94fe40460a1ebf4c82b1f2c0e75b2df, type: 2}
+--- !u!114 &1232897344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232897340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0565383eefa95094f96249f78c5ee18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 2903d192ab3176340b0a13e981b4d17e, type: 2}
+  Callbacks:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 997216619}
+        m_MethodName: StopBGM
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 997216619}
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Gameover
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1232897345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232897340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0565383eefa95094f96249f78c5ee18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: ff7a3f1a0b392de4ba2a22bbb211fd69, type: 2}
+  Callbacks:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 997216619}
+        m_MethodName: PlayBGM
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Normal
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1232897346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232897340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0565383eefa95094f96249f78c5ee18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: f94fe40460a1ebf4c82b1f2c0e75b2df, type: 2}
+  Callbacks:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 997216619}
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Destroy
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1232897347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232897340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0565383eefa95094f96249f78c5ee18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: c7777ee429e941a4892ed6a7d6ab0814, type: 2}
+  Callbacks:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 997216619}
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Place
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1269203227
 GameObject:
   m_ObjectHideFlags: 0
