@@ -9,8 +9,9 @@ public class BrickGenerator : SerializedMonoBehaviour
     public BrickScriptableObject[] DB;
     Queue<BrickScriptableObject> bagQueue = new Queue<BrickScriptableObject>();
 
-    void GenerateBag() {
+    public void GenerateBag() {
         List<BrickScriptableObject> TempArr = new List<BrickScriptableObject>(DB);
+        bagQueue.Clear();
         while(TempArr.Count > 0) {
             int r = Random.Range(0, TempArr.Count);
             bagQueue.Enqueue(TempArr[r]);

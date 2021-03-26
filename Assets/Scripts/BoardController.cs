@@ -88,6 +88,7 @@ public class BoardController : MonoBehaviour
     
     public void ResetGame() {
         ClearBoard();
+        BrickGenerator.GenerateBag();
 
         GameData.Initilaize();
     }
