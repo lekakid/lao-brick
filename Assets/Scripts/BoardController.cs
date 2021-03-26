@@ -67,6 +67,7 @@ public class BoardController : MonoBehaviour
 
     public void StartGame(bool isPractice) {
         GameData.SetMode(isPractice);
+        GameData.LoadHighScore();
         StartGame();
     }
 
@@ -87,8 +88,6 @@ public class BoardController : MonoBehaviour
     
     public void ResetGame() {
         ClearBoard();
-        GenerateBrick();
-        ShowPreview();
 
         GameData.Initilaize();
     }

@@ -68,18 +68,23 @@ public class GameDataSO : ScriptableObject
     }
 
     public void Initilaize() {
+        _score = 0;
         _level = 1;
         _clearLines = 0;
-
-        LoadHighScore();
-        _score = 0;
-        ModifiedScoreEvent.Invoke();
-
         _currentFallDelay = FallDelay;
+        _currentAccumulateDelay = 0;
+
+        BrickPivot = Vector2.zero;
+        BrickDropPos = Vector2.zero;
+        BrickRotation = 0;
+        BrickData = null;
+
+        ModifiedScoreEvent.Invoke();
     }
 
     public void LoadHighScore() {
         _highScore = PlayerPrefs.GetInt($"HighScore_{_mode}", 0);
+        ModifiedScoreEvent.Invoke();
     }
 
     public void SaveHighScore() {
