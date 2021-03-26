@@ -3,18 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using Sirenix.OdinInspector;
 
 public class BoardController : MonoBehaviour
 {
     [Header("UI")]
-    public PauseController PauseController;
+    public BoardRenderer BoardRenderer;
     public SpriteRenderer Preview;
-
-    [Header("Item")]
-    public Transform ItemContainer;
-    [AssetsOnly]
-    public GameObject ItemPrefab;
+    public PauseController PauseController;
 
     [Header("Input")]
     public PlayerInput PlayerInput;
@@ -40,16 +35,6 @@ public class BoardController : MonoBehaviour
     InputActionMap _inputMapGame;
 
     private void Awake() {
-        GameData.BoardItems = new BoardItem[10, 20];
-        GameData.LineCounts = new int[20];
-        for(int y = 0; y < 20; y++) {
-            for(int x = 0; x < 10; x++) {
-                GameObject item = Instantiate(ItemPrefab, ItemContainer.localPosition + new Vector3(x, y, 0), Quaternion.identity);
-                item.transform.SetParent(ItemContainer);
-                GameData.BoardItems[x, y] = item.GetComponent<BoardItem>();
-            }
-        }
-
         BrickGenerator = GetComponent<BrickGenerator>();
         _inputMapGame = PlayerInput.actions.FindActionMap("GAME");
     }
@@ -73,7 +58,7 @@ public class BoardController : MonoBehaviour
         Controller.interactable = true;
         
         Time.timeScale = 1f;
-        ItemContainer.gameObject.SetActive(true);
+        BoardRenderer.SetActiveContainer(true);
 
         StartEvent.Invoke();
 
@@ -87,7 +72,7 @@ public class BoardController : MonoBehaviour
 
     public void PauseGame() {
         Time.timeScale = 0;
-        ItemContainer.gameObject.SetActive(false);
+        BoardRenderer.SetActiveContainer(false);
         PauseController.Show();
         _inputMapGame.Disable();
         Controller.interactable = false;
@@ -95,7 +80,7 @@ public class BoardController : MonoBehaviour
 
     public void ResumeGame() {
         Time.timeScale = 1f;
-        ItemContainer.gameObject.SetActive(true);
+        BoardRenderer.SetActiveContainer(true);
         _inputMapGame.Enable();
         Controller.interactable = true;
     }
@@ -128,8 +113,8 @@ public class BoardController : MonoBehaviour
             return;
         }
 
-        RenderShadow();
-        RenderBrick();
+        BoardRenderer.RenderShadow();
+        BoardRenderer.RenderBrick();
     }
 
     void ShowPreview() {
@@ -158,66 +143,6 @@ public class BoardController : MonoBehaviour
         GameData.AddScore(GameDataSO.ScoreType.PLACE);
 
         PlaceBrickEvent.Invoke();
-    }
-
-    void RenderBrick() {
-        Vector2 pivot = GameData.BrickPivot;
-        int rotation = GameData.BrickRotation;
-        Vector2[] offsets = GameData.BrickData.Offsets[rotation];
-
-        for(int i = 0; i < 4; i++) {
-            int x = (int)(pivot.x + offsets[i].x);
-            int y = (int)(pivot.y + offsets[i].y);
-
-            if(x < 10 && y < 20) {
-                GameData.BoardItems[x, y].Render(GameData.BrickData.Blocks[i], rotation);
-            }
-        }
-    }
-
-    void EraseBrick() {
-        Vector2 pivot = GameData.BrickPivot;
-        int rotation = GameData.BrickRotation;
-        Vector2[] offsets = GameData.BrickData.Offsets[rotation];
-
-        for(int i = 0; i < 4; i++) {
-            int x = (int)(pivot.x + offsets[i].x);
-            int y = (int)(pivot.y + offsets[i].y);
-
-            if(x < 10 && y < 20) {
-                GameData.BoardItems[x, y].Erase();
-            }
-        }
-    }
-
-    void RenderShadow() {
-        Vector2 pivot = GameData.BrickDropPos;
-        int rotation = GameData.BrickRotation;
-        Vector2[] offsets = GameData.BrickData.Offsets[rotation];
-
-        for(int i = 0; i < 4; i++) {
-            int x = (int)(pivot.x + offsets[i].x);
-            int y = (int)(pivot.y + offsets[i].y);
-
-            if(x < 10 && y < 20) {
-                GameData.BoardItems[x, y].RenderShadow(GameData.BrickData.Blocks[i], rotation);
-            }
-        }
-    }
-
-    void EraseShadow() {
-        Vector2 pivot = GameData.BrickDropPos;
-        int rotation = GameData.BrickRotation;
-        Vector2[] offsets = GameData.BrickData.Offsets[rotation];
-
-        for(int i = 0; i < 4; i++) {
-            int x = (int)(pivot.x + offsets[i].x);
-            int y = (int)(pivot.y + offsets[i].y);
-
-            if(x < 10 && y < 20) {
-                GameData.BoardItems[x, y].Erase();
-            }
-        }
     }
 
     bool CastBrick(Vector2 targetPivot, int rotation) {
@@ -268,11 +193,11 @@ public class BoardController : MonoBehaviour
             return;
         }
 
-        EraseBrick();
+        BoardRenderer.EraseBrick();
 
         GameData.BrickPivot += Vector2.down;
 
-        RenderBrick();
+        BoardRenderer.RenderBrick();
     }
 
     void ClearFulledLine() {
@@ -326,12 +251,12 @@ public class BoardController : MonoBehaviour
             Vector2 direction = new Vector2(input, 0);
 
             if(!CastBrick(GameData.BrickPivot + direction)) {
-                EraseBrick();
-                EraseShadow();
+                BoardRenderer.EraseBrick();
+                BoardRenderer.EraseShadow();
                 GameData.BrickPivot += direction;
                 GameData.BrickDropPos = FindDropPos();
-                RenderShadow();
-                RenderBrick();
+                BoardRenderer.RenderShadow();
+                BoardRenderer.RenderBrick();
             }
             
             yield return new WaitForSeconds(RepeatKeyDelay);
@@ -364,9 +289,9 @@ public class BoardController : MonoBehaviour
     IEnumerator HandleLand() {
         while(true) {
             if(!CastBrick(GameData.BrickPivot + Vector2.down)) {
-                EraseBrick();
+                BoardRenderer.EraseBrick();
                 GameData.BrickPivot += Vector2.down;
-                RenderBrick();
+                BoardRenderer.RenderBrick();
                 GameData.ResetDelay();
             }
             
@@ -406,11 +331,11 @@ public class BoardController : MonoBehaviour
         Vector2 pivot = GameData.BrickPivot;
         int rotation = GameData.BrickRotation;
 
-        EraseBrick();
+        BoardRenderer.EraseBrick();
 
         GameData.BrickPivot = GameData.BrickDropPos;
 
-        RenderBrick();
+        BoardRenderer.RenderBrick();
         PlaceBrick();
         GameData.ResetDelay();
     }
@@ -425,12 +350,12 @@ public class BoardController : MonoBehaviour
         int rotation = (GameData.BrickRotation + 1) % 4;
         if(CastBrick(rotation)) return;
 
-        EraseBrick();
-        EraseShadow();
+        BoardRenderer.EraseBrick();
+        BoardRenderer.EraseShadow();
         GameData.BrickRotation = rotation;
         GameData.BrickDropPos = FindDropPos();
-        RenderShadow();
-        RenderBrick();
+        BoardRenderer.RenderShadow();
+        BoardRenderer.RenderBrick();
     }
 
     public void OnPause(InputAction.CallbackContext context) {

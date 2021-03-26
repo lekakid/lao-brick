@@ -2638,7 +2638,7 @@ GameObject:
   - component: {fileID: 736374894}
   - component: {fileID: 736374893}
   m_Layer: 0
-  m_Name: BoardRenderer
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4602,17 +4602,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f945d0cef087ec4cb65b3a0df42fe66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PauseController: {fileID: 267150418}
+  BoardRenderer: {fileID: 1365681618}
   Preview: {fileID: 386078112}
-  ItemContainer: {fileID: 922459072}
-  ItemPrefab: {fileID: 6823232494549591856, guid: 056b5ccde0736c04daf56a500e8241d7,
-    type: 3}
+  PauseController: {fileID: 267150418}
   PlayerInput: {fileID: 810150101}
   Controller: {fileID: 960008503}
   RepeatKeyDelay: 0.15
   GameData: {fileID: 11400000, guid: dcf4c91ccfe57cd41895776c360b3fe5, type: 2}
   StartEvent: {fileID: 11400000, guid: ff7a3f1a0b392de4ba2a22bbb211fd69, type: 2}
-  PauseEvent: {fileID: 11400000, guid: 6bc1e11df8e4b1f4691afb01009a4996, type: 2}
   GameOverEvent: {fileID: 11400000, guid: 2903d192ab3176340b0a13e981b4d17e, type: 2}
   PlaceBrickEvent: {fileID: 11400000, guid: c7777ee429e941a4892ed6a7d6ab0814, type: 2}
   ClearLineEvent: {fileID: 11400000, guid: f94fe40460a1ebf4c82b1f2c0e75b2df, type: 2}
@@ -5223,6 +5220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1365681617}
+  - component: {fileID: 1365681618}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -5246,6 +5244,22 @@ Transform:
   m_Father: {fileID: 280703915}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1365681618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365681616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f68875414964cb428aa2c40e8f65f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemContainer: {fileID: 922459072}
+  ItemPrefab: {fileID: 6823232494549591856, guid: 056b5ccde0736c04daf56a500e8241d7,
+    type: 3}
+  GameData: {fileID: 11400000, guid: dcf4c91ccfe57cd41895776c360b3fe5, type: 2}
 --- !u!1 &1389659571
 GameObject:
   m_ObjectHideFlags: 0
