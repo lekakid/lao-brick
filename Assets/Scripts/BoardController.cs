@@ -193,11 +193,8 @@ public class BoardController : MonoBehaviour
             return;
         }
 
-        BoardRenderer.EraseBrick();
-
         GameData.BrickPivot += Vector2.down;
-
-        BoardRenderer.RenderBrick();
+        BoardRenderer.RenderBrick(true);
     }
 
     void ClearFulledLine() {
@@ -251,12 +248,10 @@ public class BoardController : MonoBehaviour
             Vector2 direction = new Vector2(input, 0);
 
             if(!CastBrick(GameData.BrickPivot + direction)) {
-                BoardRenderer.EraseBrick();
-                BoardRenderer.EraseShadow();
                 GameData.BrickPivot += direction;
                 GameData.BrickDropPos = FindDropPos();
-                BoardRenderer.RenderShadow();
-                BoardRenderer.RenderBrick();
+                BoardRenderer.RenderShadow(true);
+                BoardRenderer.RenderBrick(true);
             }
             
             yield return new WaitForSeconds(RepeatKeyDelay);
@@ -289,9 +284,8 @@ public class BoardController : MonoBehaviour
     IEnumerator HandleLand() {
         while(true) {
             if(!CastBrick(GameData.BrickPivot + Vector2.down)) {
-                BoardRenderer.EraseBrick();
                 GameData.BrickPivot += Vector2.down;
-                BoardRenderer.RenderBrick();
+                BoardRenderer.RenderBrick(true);
                 GameData.ResetDelay();
             }
             
@@ -328,16 +322,9 @@ public class BoardController : MonoBehaviour
     }
 
     public void OnDropDown() {
-        Vector2 pivot = GameData.BrickPivot;
-        int rotation = GameData.BrickRotation;
-
-        BoardRenderer.EraseBrick();
-
         GameData.BrickPivot = GameData.BrickDropPos;
-
-        BoardRenderer.RenderBrick();
+        BoardRenderer.RenderBrick(true);
         PlaceBrick();
-        GameData.ResetDelay();
     }
 
     public void OnRotate(InputAction.CallbackContext context) {
@@ -350,12 +337,10 @@ public class BoardController : MonoBehaviour
         int rotation = (GameData.BrickRotation + 1) % 4;
         if(CastBrick(rotation)) return;
 
-        BoardRenderer.EraseBrick();
-        BoardRenderer.EraseShadow();
         GameData.BrickRotation = rotation;
         GameData.BrickDropPos = FindDropPos();
-        BoardRenderer.RenderShadow();
-        BoardRenderer.RenderBrick();
+        BoardRenderer.RenderShadow(true);
+        BoardRenderer.RenderBrick(true);
     }
 
     public void OnPause(InputAction.CallbackContext context) {

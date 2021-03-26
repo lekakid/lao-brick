@@ -11,6 +11,10 @@ public class BoardRenderer : MonoBehaviour
     [Header("ScriptableObjects")]
     public GameDataSO GameData;
 
+    Vector2 prevBrickPivot;
+    Vector2 prevShadowPivot;
+    Vector2[] prevOffset;
+
     private void Awake() {
         GameData.BoardItems = new BoardItem[10, 20];
         GameData.LineCounts = new int[20];
@@ -40,12 +44,21 @@ public class BoardRenderer : MonoBehaviour
                 GameData.BoardItems[x, y].Render(GameData.BrickData.Blocks[i], rotation);
             }
         }
+
+        prevBrickPivot = pivot;
+        prevOffset = offsets;
+    }
+
+    public void RenderBrick(bool Erase) {
+        if(Erase) EraseBrick();
+        RenderBrick();
     }
 
     public void EraseBrick() {
-        Vector2 pivot = GameData.BrickPivot;
-        int rotation = GameData.BrickRotation;
-        Vector2[] offsets = GameData.BrickData.Offsets[rotation];
+        if(prevOffset == null) return;
+
+        Vector2 pivot = prevBrickPivot;
+        Vector2[] offsets = prevOffset;
 
         for(int i = 0; i < 4; i++) {
             int x = (int)(pivot.x + offsets[i].x);
@@ -70,12 +83,20 @@ public class BoardRenderer : MonoBehaviour
                 GameData.BoardItems[x, y].RenderShadow(GameData.BrickData.Blocks[i], rotation);
             }
         }
+
+        prevShadowPivot = pivot;
+    }
+
+    public void RenderShadow(bool Erase) {
+        if(Erase) EraseShadow();
+        RenderShadow();
     }
 
     public void EraseShadow() {
-        Vector2 pivot = GameData.BrickDropPos;
-        int rotation = GameData.BrickRotation;
-        Vector2[] offsets = GameData.BrickData.Offsets[rotation];
+        if(prevOffset == null) return;
+
+        Vector2 pivot = prevShadowPivot;
+        Vector2[] offsets = prevOffset;
 
         for(int i = 0; i < 4; i++) {
             int x = (int)(pivot.x + offsets[i].x);
