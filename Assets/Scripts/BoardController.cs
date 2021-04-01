@@ -133,6 +133,9 @@ public class BoardController : MonoBehaviour
             if(x < 10 && y < 20) {
                 GameData.BoardItems[x, y].exists = true;
                 GameData.BoardItems[x, y].Place();
+                if(GameData.Mode == "Hardcore") {
+                    GameData.BoardItems[x, y].Erase();
+                }
                 GameData.LineCounts[y] += 1;
             }
         }
