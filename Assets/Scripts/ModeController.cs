@@ -31,14 +31,4 @@ public class ModeController : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(PracticeButton);
     }
-
-    public void OnClickPractice() {
-        boardController.StartGame(true);
-        Hide();
-    }
-
-    public void OnClickStandard() {
-        boardController.StartGame(false);
-        Hide();
-    }
 }

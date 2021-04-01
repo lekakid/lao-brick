@@ -42,6 +42,10 @@ public class GameDataSO : ScriptableObject
         }
     }
 
+    public string Mode {
+        get { return _mode; }
+    }
+
     public bool hasBrick {
         get {
             return BrickData != null;
@@ -63,8 +67,8 @@ public class GameDataSO : ScriptableObject
         BrickData = null;
     }
 
-    public void SetMode(bool isPractice) {
-        _mode = isPractice ? "Practice" : "Standard";
+    public void SetMode(string mode) {
+        _mode = mode;
     }
 
     public void Initilaize() {

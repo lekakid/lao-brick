@@ -65,8 +65,8 @@ public class BoardController : MonoBehaviour
         _isPlaying = true;
     }
 
-    public void StartGame(bool isPractice) {
-        GameData.SetMode(isPractice);
+    public void StartGame(string mode) {
+        GameData.SetMode(mode);
         GameData.LoadHighScore();
         StartGame();
     }
