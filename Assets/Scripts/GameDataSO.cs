@@ -8,8 +8,8 @@ public class GameDataSO : ScriptableObject
 
     [Header("Difficulty")]
     public float FallDelay = 1.5f;
-    public float SpeedUpRate = 0.95f;
-    public int LevelCut = 20;
+    public float SpeedUpRate = 0.85f;
+    public int LevelCut = 10;
 
     [Header("Events")]
     [SerializeField]

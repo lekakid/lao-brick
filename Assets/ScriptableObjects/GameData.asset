@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   FallDelay: 1.5
-  SpeedUpRate: 0.95
-  LevelCut: 20
+  SpeedUpRate: 0.85
+  LevelCut: 10
   ModifiedScoreEvent: {fileID: 11400000, guid: f6d4c9213b6276b44bdf4e2dbda5ec34, type: 2}
   BrickPivot: {x: 0, y: 0}
   BrickDropPos: {x: 0, y: 0}
