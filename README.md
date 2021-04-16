@@ -1,30 +1,32 @@
 # 개요
+![game](https://user-images.githubusercontent.com/1362809/114988106-e8242080-9ed0-11eb-9f83-21cdc9149bfa.png)
+
 라스트오리진의 캐릭터 드라큐리나와 건물 철거를 모티브로 하는 블록 쌓기 게임입니다.
 
+# 게임 내 조작법
+* 메뉴 조작
+  * 화살표: 메뉴 버튼 선택
+  * 스페이스바: 메뉴 버튼 결정
+* 게임 내 조작
+  * 화살표 좌우: 블록 이동
+  * 화살표 위, F: 블록 시계 방향 회전
+  * 화살표 아래: 블록 한칸 이동
+  * 스페이스바: 블록 바닥까지 이동
+
 # 개발환경
-유니티
+Unity 2019.4.16f1
 
-# 실행화면
-프로토타입 버전이 나오면 작성
+## 사용 에셋
+[Odin Inspector](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041?locale=ko-KR)
 
-# 깃 메세지 컨벤션
+# 리소스 라이선스
+캐릭터의 디자인 및 설정은 (주)스마트조이의 저작물입니다.  
+'라스트오리진'은 (주)스마트조이의 상표입니다.
 
-## 커밋타입  
-| 타입 | 설명 |
-| :--: | :--  |
-| feat | 새로운 기능 추가 |
-| docs | README 수정 |
-| resource | 리소스 추가 및 수정 |
-| style | 코드 포맷팅, 가벼운 수정 |
-| refactor | 코드 전면 수정 |
-| test | 테스트, 임시 코드 |
-| chore | 프로젝트 설정, 패키지 매니저 수정 |
+---
+* Assets/Sprites/폴더 이하 PNG 및 PSB
 
-## 메세지 구성
-```
-type: subject
+Copyright 2020. MU(arone5023@protonmail.com)
 
-body
-```
-본 프로젝트는 편의상 한글로 작성  
-Github의 이슈트래킹 기능을 활용하지 않으므로 footer는 생략
+# 코드 라이선스
+Assets/Script 이하 코드들은 [MIT 라이선스](LICENSE)를 따릅니다.
