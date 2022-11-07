@@ -9,6 +9,7 @@ public class BoardController : MonoBehaviour
     [Header("UI")]
     public BoardRenderer BoardRenderer;
     public SpriteRenderer Preview;
+    public GameObject Ribbon;
     public PauseController PauseController;
 
     [Header("Input")]
@@ -67,6 +68,7 @@ public class BoardController : MonoBehaviour
 
     public void StartGame(string mode) {
         GameData.SetMode(mode);
+        Ribbon.SetActive(mode == "Practice");
         GameData.LoadHighScore();
         StartGame();
     }
