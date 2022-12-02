@@ -10,13 +10,13 @@ using UnityEngine;
 
 public class ScriptableObjectCreator : OdinMenuEditorWindow
 {
-    static HashSet<Type> scriptableObjectTypes = AssemblyUtilities.GetTypes(AssemblyTypeFlags.CustomTypes)
+    static HashSet<Type> scriptableObjectTypes = new HashSet<Type>(AssemblyUtilities.GetTypes(AssemblyTypeFlags.CustomTypes)
         .Where(t =>
             t.IsClass &&
             typeof(ScriptableObject).IsAssignableFrom(t) &&
             !typeof(EditorWindow).IsAssignableFrom(t) &&
             !typeof(Editor).IsAssignableFrom(t))
-       .ToHashSet();
+        );
 
     [MenuItem("Assets/Create Scriptable Object", priority = -1000)]
     private static void ShowDialog()
